@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vue-cli-vuex-pug-sass-template
 
 > A Vue.js project
@@ -28,3 +29,6 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# russian_backend
+>>>>>>> e50fd0368f0c500423f8bb59da839e7e88d36b2c
