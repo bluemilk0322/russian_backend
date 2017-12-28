@@ -3,12 +3,14 @@
     .d-flex.justify-content-center
       #photo.rounded-circle
     p#name.text-center Yue
-    p#title.text-center Zacks want to chase :P
+    p#title.text-center Administrator
     nav.nav.flex-column
-      a.nav-link.active(href='#') Active
-      a.nav-link(href='#') Link
-      a.nav-link(href='#') Link
-      a.nav-link.disabled(href='#') Disabled
+      a.nav-link.active(href='#') Nav 修改
+      a.nav-link(href='#') Slider 修改
+      a.nav-link(href='#') Carousel 修改
+      a.nav-link(href='#') Member 修改
+      a.nav-link(href='#') Text 修改
+      a.nav-link(href='#') Admin 管理
 </template>
 <style lang="sass">
 #left

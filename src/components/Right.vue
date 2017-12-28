@@ -1,95 +1,35 @@
 <template lang="pug">
   #right.col-sm-8
     p.
-      包皮長恨歌#[br]
-      Foreskin eternal regret
+      本系簡介#[br]
     p.
-      落屎 假掰 五天沒有睡覺#[br]
-      Diarrhea, Affectation, Five days without sleep#[br]
-      退學 令我無眠 教授恁真正膣屄#[br]
-      Drop out, Make me insomnia, Professor you really asshole#[br]
-      你較細膩 我上袂爽#[br]
-      You should be careful, I am very fury#[br]
-      挽恁𡳞鳥 燒恁𡳞毛#[br]
-      Pull your cock, Burn your pubic hair#[br]
-      我真正袂驚 恁掣咧等 我明仔載去辦黨證#[br]
-      I'm not afraid, You fear and wait, I will apply for a political party membership card tomorrow
+      本系成立於民國82年，至今已邁入第25個年頭，為淡江大學外國語文學院最年輕的科系，#[br]
+      也是國內繼政治大學及中國文化大學之後成立的第三個以俄語專業為主的科系。#[br]
+      歷年來主持系務者有：戴萬欽教授、楊棨教授、劉克甫教授 (М.В. Крюков )、#[br]
+      彼薩列夫教授(А.А.Писарев)、馬良文教授 (В.В.Малявин)、#[br]
+      張慶國副教授、蘇淑燕副教授，現任系主任為劉皇杏副教授。#[br]
+      每年招收新生一班，計62名，截至105學年度第2學期為止，本系共有254名在學學生。#[br]
+      
+    p.
+      本系早期師資以俄羅斯籍教師為主，從90學年度起，因應教學需要，#[br]
+      開始招聘本國籍教師，至106學度第1學期為止，本系聘有8位專任教師：#[br]
+      3位副教授及5位助理教授，所有教師皆擁有博士學位，#[br]
+      專長為俄國文學、語言學、文化、翻譯與俄語教學。#[br]
+      8位專任教師中有5名為本國籍，3名為俄羅斯籍 。#[br]
+      除專任教師外，另聘有兼任教師9名 ，其中5名為俄羅斯籍，3名為本國籍。#[br]
+      99學年度起聘有1名專任助教，支援主科和實習課程部分教學工作。#[br]
 
     p.
-      哇 為何要如此受罪? (恁真正會衰)#[br]
-      Wow, Why so suffer? (You have a bad luck)#[br]
-      噢 難道我是犯太歲? (人衰種匏仔生菜瓜)#[br]
-      Oh, Is this my bad year? (Gourds field grow a melon with bad luck)#[br]
-      菜瓜飼豬食 BRE-EEE-UUU BRE#[br]
-      melon feeding pig, BRE-EEE-UUU BRE#[br]
-      菜瓜真歹食 恁大嬸婆咧臭膣屄#[br]
-      Melon unpalatable, your grandaunt is such a dick
+      本系成立之初與俄羅斯研究所相互支援，同時為了配合該所研究方向，#[br]
+      開設許多文化相關課程，希望培養俄語及俄羅斯區域研究之人才。#[br]
+      為了配合本校、本院之中、長程發展計畫，#[br]
+      及因應社會變遷和學生實際需求，從96學年度開始，系務與所務各自獨立，#[br]
+      惟師資仍然互相支援。本系為尋找自己的發展與定位，#[br]
+      從94學年度開始，歷經多次課程改革之後，逐漸發展和增加實用性課程，例如商用俄語課程、#[br]
+      俄文翻譯和經貿俄語口譯等課程，希望可以幫助學生順利進入就業市場，#[br]
+      但仍保留文化和文學課程，希望透過文化和文學相關課程，#[br]
+      發展學生的國際觀，和熟悉俄國文化及政治現狀。#[br]
 
-    p.
-      啥人會知 啥人會知 長期失眠性慾強#[br]
-      Who knows? Who knows? Long-term insomnia Strong sexual desire#[br]
-      歐~ 雞排#[br]
-      Oh~ chicken#[br]
-      所有人都當我螃蟹 只好排擠世界 憎恨世界#[br]
-      Everybody regarded me as a crab, Can only squeeze the world, Hate the world#[br]
-      回家自慰#[br]
-      Go home masturbation
-
-    p.
-      包皮長 舌頭短 雞雞出不來#[br]
-      Long foreskin, Short tongue, Dick can't go out#[br]
-      長超醜 家窮 呀#[br]
-      Super ugly, Poor family, Yeeeeeeeeeee#[br]
-      我命賤 我命賤#[br]
-      my life is cheap, my life is cheap#[br]
-      崩潰 舌頭太短要講泰文#[br]
-      hysteria, Short tongue to speak Thai#[br]
-      ฉันขอขอบคุณสุดเข้มข้น#[br]
-      my body odor stinking#[br]
-      ผมน้ำมันซุปเปอร์#[br]
-      my hair is super greasy#[br]
-      ผมฝึกซ้อมทุกวัน#[br]
-      I take the train every day#[br]
-      เรามีโดนัลด์ดั๊ก#[br]
-      We are Donald Duck
-
-    p.
-      喔~ come on baby 跟我 high 唷#[br]
-      woooo, come on baby high with me, yo#[br]
-      this is DJ 亡靈 shake your body as you can can can can#[br]
-      this is DJ ghost, shake your body as you can can can can#[br]
-      從我出生到我長這麼大 我聽見的看見的都只有hip-pop#[br]
-      Ever since I was born and grew up, all I heard and saw was hip-pop#[br]
-      拿出你的雙手跟我比一個三 容我介紹這是台灣hip-pop#[br]
-      raise your hands and give me three, Let me introduce the Taiwan style hip-pop#[br]
-      這世界只能有hip-pop 搖滾樂you suck只有hip-pop#[br]
-      This world can only have hip-pop, rock music you suck, only hip-pop#[br]
-      想把妹你要學會hip-pop hip-pop來煞氣的hip-pop#[br]
-      want to pick up girl you should learn hip-pop, hip-pop thug hip-pop
-
-    p.
-      眼鏡沾到大便#[br]
-      Glasses stained shit#[br]
-      眾人順遂而獨我遭天譴 上天不公你只能妥協#[br]
-      Everyone is successful only me was cursed, God is not fair You can only compromise
-
-    p.
-      Con los terroristas, con los terroristas, con los terroristas#[br]
-      Along with terrorists, along with terrorists, along with terrorists
-
-    p.
-      恁 食屎無味 食屎無味#[br]
-      You, eat shit tasteless, eat shit tasteless#[br]
-      suck my dick 無味 suck my dick 無味#[br]
-      suck my dick tasteless, suck my dick tasteless#[br]
-      恁真正可憐 來去共尻川洗洗#[br]
-      You're poor, go wash your ass#[br]
-      賣尻川 較會 趁 大 錢#[br]
-      Selling ass is More profitable
-
-    p.
-      con los terrori 幹 con los terrori 幹#[br]
-      Along with terrori fuck, along with terrori FUCK﻿
 </template>
 <style lang="sass">
 #right
