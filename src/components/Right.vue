@@ -9,7 +9,7 @@
       彼薩列夫教授(А.А.Писарев)、馬良文教授 (В.В.Малявин)、#[br]
       張慶國副教授、蘇淑燕副教授，現任系主任為劉皇杏副教授。#[br]
       每年招收新生一班，計62名，截至105學年度第2學期為止，本系共有254名在學學生。#[br]
-      
+
     p.
       本系早期師資以俄羅斯籍教師為主，從90學年度起，因應教學需要，#[br]
       開始招聘本國籍教師，至106學度第1學期為止，本系聘有8位專任教師：#[br]
@@ -29,8 +29,34 @@
       俄文翻譯和經貿俄語口譯等課程，希望可以幫助學生順利進入就業市場，#[br]
       但仍保留文化和文學課程，希望透過文化和文學相關課程，#[br]
       發展學生的國際觀，和熟悉俄國文化及政治現狀。#[br]
+    p {{ testData }}
 
 </template>
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  data () {
+    return {
+      testData: null
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.apiTest()
+        .then(data => {
+          this.testData = data
+        })
+    })
+  },
+  methods: {
+    ...mapActions({
+      apiTest: 'apiTest'
+    })
+  }
+}
+</script>
+
 <style lang="sass">
 #right
   min-height: 100vh

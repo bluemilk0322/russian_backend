@@ -1,5 +1,5 @@
 export const api = {
-  root: 'https://192.168.88.204',
+  root: 'https://192.168.88.112:13306',
   getAllStaff () {
     const link = this.root + '/staff'
     const method = {
