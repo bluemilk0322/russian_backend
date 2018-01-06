@@ -33,20 +33,22 @@
 
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data () {
     return {
-      testData: null
+      // testData: null
     }
+  },
+  computed: {
+    ...mapState({
+      testData: state => state.staff
+    })
   },
   mounted () {
     this.$nextTick(() => {
       this.apiTest()
-        .then(data => {
-          this.testData = data
-        })
     })
   },
   methods: {
