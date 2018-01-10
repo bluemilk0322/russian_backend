@@ -1,12 +1,19 @@
 <template lang="pug">
 #Carousel.card
   .card-header
-    h1 Carousel
+    h1 Banner
   .card-body
+    p {{ banners }}
 </template>
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  computed: {
+    ...mapState({
+      banners: state => state.banner
+    })
+  }
 }
 </script>
 <style lang="sass" scoped>

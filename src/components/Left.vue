@@ -9,12 +9,12 @@
       .name USER
       .title ADMIN
     nav.nav.flex-column
-      router-link.nav-link(to="/nav") Nav 修改
+      router-link.nav-link(to="/nav") Navigation 修改
       router-link.nav-link(to="/slider") Slider 修改
-      router-link.nav-link(to="/carousel") Carousel 修改
+      router-link.nav-link(to="/carousel") Banner 修改
       router-link.nav-link(to="/member") Member 修改
-      router-link.nav-link(to="/text") Text 修改
-      router-link.nav-link(to="/admin") Admin 管理
+      router-link.nav-link(to="/text") Content 修改
+      router-link.nav-link(to="/admin") Admission 管理
 </template>
 <style lang="sass">
 #left

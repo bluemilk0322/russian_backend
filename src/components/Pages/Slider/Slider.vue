@@ -3,10 +3,17 @@
   .card-header
     h1 Slider
   .card-body
+    p {{ sliders }}
 </template>
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  computed: {
+    ...mapState({
+      sliders: state => state.slider.data
+    })
+  }
 }
 </script>
 <style lang="sass" scoped>

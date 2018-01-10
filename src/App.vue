@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Left from './components/Left'
 import Right from './components/Right'
 
@@ -13,6 +14,16 @@ export default {
   components: {
     Left,
     Right
+  },
+  methods: {
+    ...mapActions({
+      apiTest: 'apiTest'
+    })
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.apiTest()
+    })
   }
 }
 </script>
