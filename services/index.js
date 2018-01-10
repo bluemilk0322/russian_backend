@@ -1,0 +1,24 @@
+const file = require('./file');
+const user = require('./user/user.service.js');
+const slider = require('./slider/slider.service.js');
+const news = require('./news/news.service.js');
+const member = require('./member/member.service.js');
+const admission = require('./admission/admission.service.js');
+const navigation = require('./navigation/navigation.service.js');
+const navigationItem = require('./navigation-item/navigation-item.service.js');
+const content = require('./content/content.service.js');
+const winning = require('./winning/winning.service.js');
+const banner = require('./banner/banner.service.js');
+module.exports = function (app) {
+  app.configure(file);
+  app.configure(user);
+  app.configure(slider);
+  app.configure(news);
+  app.configure(member);
+  app.configure(admission);
+  app.configure(navigation);
+  app.configure(navigationItem);
+  app.configure(content);
+  app.configure(winning);
+  app.configure(banner);
+};

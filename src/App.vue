@@ -1,8 +1,7 @@
 <template lang="pug">
-  #app.container
-    .row
-      Left
-      Right
+  #app
+    Left
+    Right
 </template>
 
 <script>
@@ -20,6 +19,8 @@ export default {
 
 <style lang="sass">
 #app
+  display: flex
   min-height: 100vh
   min-width: 100vw
+
 </style>

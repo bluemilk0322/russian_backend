@@ -1,33 +1,43 @@
 <template lang="pug">
-  #left.col-sm-4
-    .d-flex.justify-content-center
-      #photo.rounded-circle
-    p#name.text-center Yue
-    p#title.text-center Administrator
+  #left
+    //- .d-flex.justify-content-center
+    //-   #photo.rounded-circle
+    //- p#name.text-center Yue
+    //- p#title.text-center Administrator
+    .user
+      .photo.rounded-circle
+      .name USER
+      .title ADMIN
     nav.nav.flex-column
-      a.nav-link.active(href='#') Nav 修改
-      a.nav-link(href='#') Slider 修改
-      a.nav-link(href='#') Carousel 修改
-      a.nav-link(href='#') Member 修改
-      a.nav-link(href='#') Text 修改
-      a.nav-link(href='#') Admin 管理
+      router-link.nav-link(to="/nav") Nav 修改
+      router-link.nav-link(to="/slider") Slider 修改
+      router-link.nav-link(to="/carousel") Carousel 修改
+      router-link.nav-link(to="/member") Member 修改
+      router-link.nav-link(to="/text") Text 修改
+      router-link.nav-link(to="/admin") Admin 管理
 </template>
 <style lang="sass">
 #left
+  width: 300px
+  padding: 20px
   min-height: 100vh
-  background: #ccc
-  #photo
-    margin: 20px
+  .user
     height: 200px
-    width: 200px
-    background: url(https://scontent-tpe1-1.xx.fbcdn.net/v/t31.0-8/12465819_1040206906001496_8984799855126950684_o.jpg?oh=a9beae18cc84e37d06b831cbdd58e512&oe=5AB34E0B) 0px -350px
-    background-size: 95%
-     background-repeat: no-repeat
-  #name
-    font-size: 40px
-    margin: 5px
-  #title
-    font-size: 30px
+    background: grey
+    padding: 10px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    .photo
+      margin: 0 auto
+      height: 100px
+      width: 100px
+      background: url(https://scontent-tpe1-1.xx.fbcdn.net/v/t31.0-8/12465819_1040206906001496_8984799855126950684_o.jpg?oh=a9beae18cc84e37d06b831cbdd58e512&oe=5AB34E0B) 0px -350px
+      background-size: cover
+    .name
+      text-align: center
+    .title
+      text-align: center
   a
     background: #eee
 </style>
