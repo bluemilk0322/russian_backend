@@ -1,5 +1,8 @@
 <template lang="pug">
-#Carousel Carousel
+#Carousel.card
+  .card-header
+    h1 Carousel
+  .card-body
 </template>
 <script>
 export default {

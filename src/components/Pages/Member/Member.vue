@@ -1,5 +1,8 @@
 <template lang="pug">
-#Member Member
+#Member.card
+  .card-header
+    h1 Member
+  .card-body
 </template>
 <script>
 export default {

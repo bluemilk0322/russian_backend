@@ -32,9 +32,7 @@ export default {
 </script>
 <style lang="sass" scoped>
 #Nav
-  height: 100%
   .card-body
-    overflow-y: scroll
     .add
       margin: 0 0 10px 0
     .list-group

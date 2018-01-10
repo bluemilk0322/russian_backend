@@ -23,4 +23,10 @@ export default {
   min-height: 100vh
   min-width: 100vw
 
+
+// GLOBALS
+.card
+  height: 100%
+  .card-body
+    overflow-y: scroll
 </style>
