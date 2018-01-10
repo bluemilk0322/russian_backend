@@ -105,6 +105,15 @@ export const api = {
       return axios(method.get(link.content)).then(response => {
         return response.data
       })
+    },
+    edit ({ title, content }) {
+      const data = {
+        key: title,
+        value: content
+      }
+      return axios(method.post(link.content, data)).then(response => {
+        console.log(response)
+      })
     }
   },
   admission: {

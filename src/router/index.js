@@ -1,20 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Nav from '../components/Pages/Nav/Nav.vue'
+import Navigation from '../components/Pages/Navigation/Navigation.vue'
 import Slider from '../components/Pages/Slider/Slider.vue'
-import Carousel from '../components/Pages/Carousel/Carousel.vue'
+import Banner from '../components/Pages/Banner/Banner.vue'
 import Member from '../components/Pages/Member/Member.vue'
-import TextPage from '../components/Pages/Text/Text.vue'
-import Admin from '../components/Pages/Admin/Admin.vue'
+import Content from '../components/Pages/Content/Content.vue'
+import Admission from '../components/Pages/Admission/Admission.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/nav',
-      name: 'Nav',
-      component: Nav
+      path: '/navigation',
+      name: 'Navigation',
+      component: Navigation
     },
     {
       path: '/slider',
@@ -22,9 +22,9 @@ export default new Router({
       component: Slider
     },
     {
-      path: '/carousel',
-      name: 'Carousel',
-      component: Carousel
+      path: '/banner',
+      name: 'Banner',
+      component: Banner
     },
     {
       path: '/member',
@@ -32,18 +32,18 @@ export default new Router({
       component: Member
     },
     {
-      path: '/text',
-      name: 'Text',
-      component: TextPage
+      path: '/content',
+      name: 'Content',
+      component: Content
     },
     {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin
+      path: '/admission',
+      name: 'Admission',
+      component: Admission
     },
     {
-      path: '*',
-      redirect: '/nav'
+      path: '/*',
+      redirect: '/navigation'
     }
   ]
 })

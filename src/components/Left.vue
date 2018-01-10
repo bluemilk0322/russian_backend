@@ -1,20 +1,16 @@
 <template lang="pug">
   #left
-    //- .d-flex.justify-content-center
-    //-   #photo.rounded-circle
-    //- p#name.text-center Yue
-    //- p#title.text-center Administrator
     .user
       .photo.rounded-circle
-      .name USER
-      .title ADMIN
+      .name User
+      .title Administrator
     nav.nav.flex-column
-      router-link.nav-link(to="/nav") Navigation 修改
+      router-link.nav-link(to="/navigation") Navigation 修改
       router-link.nav-link(to="/slider") Slider 修改
-      router-link.nav-link(to="/carousel") Banner 修改
+      router-link.nav-link(to="/banner") Banner 修改
       router-link.nav-link(to="/member") Member 修改
-      router-link.nav-link(to="/text") Content 修改
-      router-link.nav-link(to="/admin") Admission 管理
+      router-link.nav-link(to="/content") Content 修改
+      router-link.nav-link(to="/admission") Admission 管理
 </template>
 <style lang="sass">
 #left
@@ -23,7 +19,7 @@
   min-height: 100vh
   .user
     height: 200px
-    background: grey
+    background: #dddfe2
     padding: 10px
     display: flex
     flex-direction: column

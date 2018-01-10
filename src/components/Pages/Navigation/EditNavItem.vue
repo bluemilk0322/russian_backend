@@ -10,6 +10,10 @@
             button.btn.btn-outline-primary(type='button') 修改
       .form-group
         label subItems
+        .input-group.add
+          input.form-control(type='text', placeholder="請輸入新標題")
+          .input-group-append
+            button.btn.btn-outline-success(type='button') 新增
         ul.list-group
           li.list-group-item.list-group-item-secondary(v-for="subitem in editItem.subItems")
             .top
@@ -41,12 +45,17 @@ export default {
 <style lang="sass" scoped>
 .edit-nav-item
   border: none
-  .list-group-item
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    .top
-      display: flex
-      flex-direction: row
-      justify-content: space-between
+  .card-body
+    form
+      .form-group
+        .list-group-item
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          .top
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+        .add
+          margin: 0 0 20px 0
 </style>

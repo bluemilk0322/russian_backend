@@ -4,7 +4,10 @@ export const state = {
   navigation: [],
   slider: [],
   banner: [],
-  member: [],
+  member: [{
+    name: 'test1',
+    member_id: 123
+  }],
   content: [],
   admission: []
 }

@@ -17,12 +17,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      apiTest: 'apiTest'
+      initData: 'initData'
     })
   },
   mounted () {
     this.$nextTick(() => {
-      this.apiTest()
+      this.initData()
     })
   }
 }
