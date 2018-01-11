@@ -4,13 +4,14 @@
     h1 Banner
   .card-body
     p {{ banners }}
-    input.form-control(type='file', required='')
+    input.form-control(type='file', required='', multiple, @change="processFiles($event)")
     .banner-images(v-viewer='{movable: false}')
-      img(v-for='src in images', :src='src', :key='src')
+      img(v-for='src in banners', :src='`http://192.168.88.204:3030` + src.path', :key='src.banner_id')
     //- button(@click="show") SHOW
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { api } from '../../../api'
 
 export default {
   data () {
@@ -29,9 +30,20 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
     show () {
       const viewer = this.$el.querySelector('.banner-images').$viewer
       viewer.show()
+    },
+    processFiles (event) {
+      const self = this
+      const file = event.target.files[0]
+      console.log(event.target)
+      api.banner.create(file).then(response => {
+        self.initData()
+      })
     }
   }
 }

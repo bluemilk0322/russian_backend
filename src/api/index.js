@@ -3,7 +3,7 @@ import axios from 'axios'
 const root = 'http://192.168.88.204:3030/api/'
 
 const link = {
-  navigation: root + 'navigation',
+  navigation: root + 'navigation/',
   navigationItem: 'navigation-item',
   slider: root + 'slider',
   carousel: root + 'carousel',
@@ -31,18 +31,42 @@ class method {
       data: data
     }
   }
+  static delete (link) {
+    return {
+      method: 'delete',
+      url: link
+    }
+  }
+  static patch (link, data) {
+    return {
+      method: 'patch',
+      url: link,
+      data: data
+    }
+  }
+}
+
+function getBase64 (file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
 }
 
 export const api = {
   navigation: {
     get () {
       return axios(method.get(link.navigation)).then(response => {
+        console.log('navigation', 'get', response)
         return response.data
       })
     },
     search ({ navigationId }) {
       const requestLink = link.navigation + '/' + navigationId
       return axios(method.get(requestLink)).then(response => {
+        console.log('navigation', 'search', response)
         return response.data
       })
     },
@@ -50,31 +74,27 @@ export const api = {
       const data = {
         name: name
       }
+      console.log(name)
       return axios(method.post(link.navigation, data)).then(response => {
+        console.log('navigation', 'create', response)
         return response
       })
     },
-    edit () {
-      const method = {
-        method: 'post',
-        url: link.navigation,
-        data: {
-          name: name
-        }
+    edit ({ navigation_id, newName }) {
+      const data = {
+        navigation_id: navigation_id,
+        name: newName
       }
-      return axios(method).then(response => {
+      return axios(method.post(link.navigation, data)).then(response => {
+        console.log('navigation', 'edit', response)
         return response
       })
     },
-    delete () {
-      const method = {
-        method: 'post',
-        url: link.navigation,
-        data: {
-          name: name
-        }
-      }
-      return axios(method).then(response => {
+    delete ({ navigationId }) {
+      const requestLink = link.navigation + navigationId
+      console.log(requestLink)
+      return axios(method.delete(requestLink)).then(response => {
+        console.log('navigation', 'delete', response)
         return response
       })
     }
@@ -89,7 +109,18 @@ export const api = {
   banner: {
     get () {
       return axios(method.get(link.banner)).then(response => {
+        console.log('banner', 'get', response)
         return response.data
+      })
+    },
+    create (fileList) {
+      return getBase64(fileList).then(base64Files => {
+        const data = {
+          uri: base64Files
+        }
+        return axios(method.post(link.banner, Array(data))).then(response => {
+          return console.log(response)
+        })
       })
     }
   },
@@ -109,7 +140,7 @@ export const api = {
     edit ({ title, content }) {
       const data = {
         key: title,
-        value: content
+        values: Array(content)
       }
       return axios(method.post(link.content, data)).then(response => {
         console.log(response)
