@@ -1,28 +1,41 @@
 <template lang="pug">
   #app
-    Left
-    Right
+    .logined(v-if="logined === 'logined'")
+      Left
+      Right
+    .not-login(v-else)
+      Login
+
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Left from './components/Left'
 import Right from './components/Right'
+import Login from './components/Login'
 
 export default {
   name: 'app',
   components: {
     Left,
-    Right
+    Right,
+    Login
+  },
+  computed: {
+    ...mapState({
+      logined: state => state.login.session
+    })
   },
   methods: {
     ...mapActions({
-      initData: 'initData'
+      initData: 'initData',
+      loadStatus: 'loadStatus'
     })
   },
   mounted () {
+    // let self = this.logined
     this.$nextTick(() => {
-      this.initData()
+      this.loadStatus()
     })
   }
 }
@@ -30,9 +43,11 @@ export default {
 
 <style lang="sass">
 #app
-  display: flex
-  min-height: 100vh
-  min-width: 100vw
+  height: 100vh
+  width: 100vw
+  .logined
+    display: flex
+  .not-login
 
 
 // GLOBALS

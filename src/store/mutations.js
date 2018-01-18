@@ -1,6 +1,10 @@
 import { types } from './mutations_types'
 
 export const state = {
+  login: {
+    session: '',
+    user: ''
+  },
   navigation: [],
   slider: [],
   banner: [],
@@ -30,5 +34,8 @@ export const mutations = {
   },
   [types.UPDATE_CONTENT_DATA] (state, data) {
     state.content = data
+  },
+  [types.UPDATE_LOGIN_STATUS] (state, loginStatus) {
+    state.login = loginStatus
   }
 }

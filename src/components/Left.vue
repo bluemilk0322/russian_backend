@@ -11,7 +11,20 @@
       router-link.nav-link(to="/member") Member 修改
       router-link.nav-link(to="/content") Content 修改
       router-link.nav-link(to="/admission") Admission 管理
+      a.nav-link(href="", @click="logout") 登出
 </template>
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions({
+      logout: 'logoutAction'
+    })
+  }
+}
+</script>
+
 <style lang="sass">
 #left
   width: 300px
@@ -34,6 +47,7 @@
       text-align: center
     .title
       text-align: center
-  a
+  .nav-link
+    // text-decoration: none
     background: #eee
 </style>
