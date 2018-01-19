@@ -6,9 +6,34 @@
         label name
         input.form-control(type='text', v-model="editItem.name")
       .form-group
-        button.btn.btn-primary 儲存
+        label position
+        input.form-control(type='text', v-model="editItem.position")
+      .form-group
+        label teaching_lessons
+        input.form-control(type='text', v-model="editItem.teaching_lessons")
+      .form-group
+        label email
+        input.form-control(type='text', v-model="editItem.email")
+      .form-group
+        label telephone
+        input.form-control(type='text', v-model="editItem.telephone")
+      .form-group
+        label type
+        select.form-control(type='text', v-model="editItem.type")
+          option(value="Fulltime") Fulltime
+          option(value="Parttime") Parttime
+          option(value="Director") Director
+          option(value="Administrative") Administrative
+          option(value="Tutor") Tutor
+      .form-group
+        label image_id
+        input.form-control(type='number', v-model.number="editItem.image_id")
+      .form-group
+        button.btn.btn-primary(@click="save") 儲存
 </template>
 <script>
+import { api } from '../../../api'
+
 export default {
   props: {
     memberItem: Object
@@ -16,6 +41,13 @@ export default {
   data () {
     return {
       editItem: Object.assign({}, this.memberItem)
+    }
+  },
+  methods: {
+    save () {
+      api.member.edit(this.editItem).then(response => {
+        console.log(response)
+      })
     }
   }
 }

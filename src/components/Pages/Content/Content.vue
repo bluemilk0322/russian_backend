@@ -6,17 +6,13 @@
     .search.card
       .card-header
         h4 文章列表
-        //- h4 搜尋
-        //- .input-group
-        //-   input.form-control(type='text', placeholder="請輸入標題", aria-label="請輸入標題", aria-describedby='basic-addon2')
-        //-   .input-group-append
-        //-     button.btn.btn-outline-success(type='button') 搜尋
+        input.form-control(v-model='search', type='text', placeholder="請輸入標題", aria-label="請輸入標題", aria-describedby='basic-addon2')
       .card-body
         ul.list-group
-          li.list-group-item(v-for="contentTitle in Object.keys(contents)")
+          li.list-group-item(v-for="contentTitle in filterList")
             h5 {{ contentTitle }}
             button.btn.btn-primary(@click="editContent(contentTitle)") 編輯
-    textarea#editor(name='content')
+    textarea#editor(name='editor')
       p 請選擇文章
     .actions
       button.btn.btn-primary(@click="saveContent") 儲存
@@ -24,57 +20,54 @@
       button.btn.btn-danger(@click="clearContent") 清除
 </template>
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { api } from '../../../api'
 
 export default {
   data () {
     return {
-      currentTitle: ''
+      currentTitle: '',
+      search: ''
     }
   },
   computed: {
     ...mapState({
       contents: state => state.content
-    })
+    }),
+    filterList () {
+      return Object.keys(this.contents).filter(title => {
+        return title.includes(this.search)
+      })
+    }
   },
   methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
     editContent (contentTitle) {
       this.currentTitle = contentTitle
-      const content = this.contents[contentTitle]
-      this.editorElement.then(editor => {
-        editor.setData(content)
-      })
+      const content = this.contents[contentTitle][0]
+      this.editorElement.setData(content)
     },
     saveContent () {
-      this.editorElement.then(editor => {
-        const newContent = editor.getData()
-        api.content.edit({title: this.currentTitle, content: newContent})
-      })
+      api.content.edit({title: this.currentTitle, content: this.editorElement.getData()})
+        .then(() => {
+          this.initData()
+        })
     },
     resetContent () {
       const content = this.contents[this.currentTitle]
-      this.editorElement.then(editor => {
-        editor.setData(content)
-      })
+      this.editorElement.setData(content)
     },
     clearContent () {
-      this.editorElement.then(editor => {
-        editor.setData('')
-      })
+      this.editorElement.setData('')
     }
   },
   mounted () {
     this.$nextTick(() => {
-      this.editorElement = ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-          return editor
-        })
-        .catch(error => {
-          console.error(error)
-        })
+      CKEDITOR.config.height = '1000px'
+      const editor = document.getElementById('editor')
+      this.editorElement = CKEDITOR.replace(editor)
     })
   }
 }

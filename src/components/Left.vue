@@ -19,8 +19,12 @@ import { mapActions } from 'vuex'
 export default {
   methods: {
     ...mapActions({
-      logout: 'logoutAction'
+      logout: 'logoutAction',
+      initData: 'initData'
     })
+  },
+  beforeMount () {
+    this.initData()
   }
 }
 </script>

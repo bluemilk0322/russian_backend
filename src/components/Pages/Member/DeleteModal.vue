@@ -7,17 +7,32 @@
         button.close(type='button', data-dismiss='modal', aria-label='Close')
           span(aria-hidden='true') ×
       .modal-body
-        p {{ member_id }}
+        p 確定刪除 #[strong {{ memberItem.name }}] ?
       .modal-footer
-        button.btn.btn-primary(type='button') 確定
+        button.btn.btn-primary(type='button', @click="deleteMember") 確定
         button.btn.btn-secondary(type='button', data-dismiss='modal') 取消
 </template>
 <script>
+import { api } from '../../../api'
+import { mapActions } from 'vuex'
+
 export default {
   props: {
-    member_id: {
-      type: Number,
+    memberItem: {
+      type: Object,
       required: false
+    }
+  },
+  methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
+    deleteMember () {
+      const self = this
+      api.member.delete(this.memberItem.member_id).then(response => {
+        console.log(response)
+        self.initData()
+      })
     }
   }
 }

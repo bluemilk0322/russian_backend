@@ -3,11 +3,24 @@
   .card-header
     h1 Banner
   .card-body
-    p {{ banners }}
-    input.form-control(type='file', required='', multiple=true, @change="processFiles($event)")
-    button(@click='uploadPics') 上傳
-    .banner-images(v-viewer='{movable: false}')
-      img(v-for='src in banners', :src='`http://192.168.88.204:3030` + src.path', :key='src.banner_id')
+    //- p {{ banners }}
+    .card.text-center
+      .card-header
+        label.btn.btn-info.form-control
+          input(style='display:none;', type='file', multiple=true, @change="processFiles($event)")
+          | 選擇圖片
+      .card-body
+        h4(v-if="files.length === 0") 尚未選擇檔案
+        .pics(v-else)
+          .file(v-for="file in files") {{ file.name }}
+      .card-footer
+        button.form-control.btn.btn-primary(@click='uploadPics') 上傳
+    .card
+      .card-header
+        h4 已上傳圖片
+      .card-body
+        .banner-images(v-viewer='{movable: false}')
+          img(v-for='src in banners', :src='`http://192.168.88.204:3030` + src.path', :key='src.banner_id')
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -43,8 +56,10 @@ export default {
       this.files = []
       const files = event.target.files
       for (let index = 0; index < files.length; index++) {
-        this.getBase64(files[index]).then(data => {
-          this.files.push({uri: data})
+        const file = files[index]
+        const filename = file.name
+        this.getBase64(file).then(data => {
+          this.files.push({name: filename, uri: data})
         })
       }
     },

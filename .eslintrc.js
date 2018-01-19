@@ -26,6 +26,7 @@ module.exports = {
   },
   globals: {
     axios: 1,
-    $: 1
+    $: 1,
+    CKEDITOR: 1
   }
 }

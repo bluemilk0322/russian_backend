@@ -116,6 +116,23 @@ export const api = {
       return axios(Method.get(link.member)).then(response => {
         return response.data
       })
+    },
+    create (data) {
+      return axios(Method.post(link.member, data)).then(response => {
+        return response
+      })
+    },
+    edit (data) {
+      const requestLink = link.member + data.member_id
+      return axios(Method.patch(requestLink, data)).then(response => {
+        return response
+      })
+    },
+    delete (memberId) {
+      const requestLink = link.member + memberId
+      return axios(Method.delete(requestLink)).then(response => {
+        return response
+      })
     }
   },
   content: {
