@@ -3,7 +3,7 @@
     .logined(v-if="logined === 'logined'")
       Left
       Right
-    .not-login(v-else)
+    .not-login(v-if="logined !== 'logined'")
       Login
 
 </template>
