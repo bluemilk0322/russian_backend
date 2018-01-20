@@ -26,13 +26,21 @@
           option(value="Administrative") Administrative
           option(value="Tutor") Tutor
       .form-group
-        label image_id
-        input.form-control(type='number', v-model.number="editItem.image_id")
+        label image
+        label.btn.btn-info.form-control
+          input(style='display:none;', type='file', @change="processFiles($event)")
+          | 上傳圖片
+        label 預覽圖片
+        .review(v-if="editItem.image.path !== ''")
+          img(:src="'http://192.168.88.204:3030' + editItem.image.path")
+        .none(v-else)
+          p 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click="save") 儲存
 </template>
 <script>
 import { api } from '../../../api'
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -44,9 +52,30 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
     save () {
+      const self = this
       api.member.edit(this.editItem).then(response => {
-        console.log(response)
+        self.initData()
+      })
+    },
+    processFiles (event) {
+      const self = this
+      const file = event.target.files[0]
+      this.getBase64(file).then(data => {
+        api.banner.create(Array({uri: data})).then(response => {
+          self.editItem.image = response.data[0].file
+        })
+      })
+    },
+    getBase64 (file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = error => reject(error)
       })
     }
   }

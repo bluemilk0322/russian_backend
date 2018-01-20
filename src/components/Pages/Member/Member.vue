@@ -40,7 +40,9 @@ export default {
   data () {
     return {
       search: '',
-      deleteMember: null
+      deleteMember: {
+        name: null
+      }
     }
   },
   computed: {

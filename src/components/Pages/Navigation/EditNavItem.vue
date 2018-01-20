@@ -7,7 +7,7 @@
         .input-group
           input.form-control(type='text', v-model="editItem.name")
           .input-group-append
-            button.btn.btn-outline-primary(type='button') 修改
+            button.btn.btn-outline-primary(type='button', @click="editNavigationName(editItem)") 修改
       .form-group
         label subItems
         .input-group.add
@@ -27,6 +27,8 @@
 </template>
 <script>
 import EditSubItem from './EditSubItem'
+import { api } from '../../../api'
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -38,6 +40,18 @@ export default {
   data () {
     return {
       editItem: Object.assign({}, this.navItem)
+    }
+  },
+  methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
+    editNavigationName (navItem) {
+      const self = this
+      api.navigation.edit(navItem).then(response => {
+        console.log(response)
+        self.initData()
+      })
     }
   }
 }

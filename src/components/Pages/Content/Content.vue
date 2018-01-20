@@ -67,7 +67,9 @@ export default {
     this.$nextTick(() => {
       CKEDITOR.config.height = '1000px'
       const editor = document.getElementById('editor')
-      this.editorElement = CKEDITOR.replace(editor)
+      this.editorElement = CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: api.single_file_upload.link
+      })
     })
   }
 }

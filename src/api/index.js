@@ -14,7 +14,8 @@ const link = {
   winning: root + 'winning/',
   news: root + 'news/',
   file: root + 'file/',
-  user: root + 'user/'
+  user: root + 'user/',
+  single_file_upload: root + 'single_file_upload/'
 }
 
 class Method {
@@ -70,12 +71,9 @@ export const api = {
         return response
       })
     },
-    edit ({ navigation_id, newName }) {
-      const data = {
-        navigation_id: navigation_id,
-        name: newName
-      }
-      return axios(Method.post(link.navigation, data)).then(response => {
+    edit (data) {
+      const requestLink = link.navigation + data.navigation_id
+      return axios(Method.patch(requestLink, data)).then(response => {
         console.log('navigation', 'edit', response)
         return response
       })
@@ -87,6 +85,20 @@ export const api = {
         console.log('navigation', 'delete', response)
         return response
       })
+    }
+  },
+  navigationItem: {
+    get () {
+
+    },
+    create ({ navigationId, subItem }) {
+
+    },
+    edit () {
+
+    },
+    delete () {
+
     }
   },
   slider: {
@@ -104,16 +116,17 @@ export const api = {
       })
     },
     create (files) {
-      // return axios(Method.post(link.banner, files)).then(response => {
-      //   console.log('banner', 'create', response)
-      //   return console.log(response)
-      // })
+      return axios(Method.post(link.banner, files)).then(response => {
+        console.log('banner', 'create', response)
+        return response
+      })
       // return axios(Method.patch(link.banner))
     }
   },
   member: {
     get () {
       return axios(Method.get(link.member)).then(response => {
+        console.log('member', 'get', response)
         return response.data
       })
     },
@@ -155,6 +168,17 @@ export const api = {
     get () {
       return axios(Method.get(link.admission)).then(response => {
         return response.data
+      })
+    }
+  },
+  single_file_upload: {
+    link: link.single_file_upload,
+    create (file) {
+      const data = new FormData()
+      data.append('upload', file)
+      return axios(Method.post(link.single_file_upload, data)).then(response => {
+        console.log('single_file_upload', 'create', response)
+        return response
       })
     }
   }
