@@ -64,22 +64,40 @@ export default {
     }),
     save () {
       const self = this
-      try {
-        if (this.preview.file !== null) {
-          this.getBase64(this.preview.file).then(data => {
-            self.editItem.image = {uri: data}
-          })
+      return new Promise((resolve, reject) => {
+        if (self.preview.file !== null) {
+          self.getBase64(self.preview.file).then(data => {resolve(data)});
         }
-      }
-      catch (error) {
-        console.log(error)
-      }
-      finally {
-        api.member.edit(self.editItem).then(response => {
-          console.log(response)
-          self.initData()
-        })
-      }
+        else resolve();
+      })
+      .then(data => {
+        if (data) self.editItem.image = {uri: data}
+        return api.member.edit(self.editItem)
+      })
+      .then(response => {
+        console.log(response)
+        self.initData()
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      
+      // try {
+      //   if (this.preview.file !== null) {
+      //     this.getBase64(this.preview.file).then(data => {
+      //       self.editItem.image = {uri: data}
+      //     })
+      //   }
+      // }
+      // catch (error) {
+      //   console.log(error)
+      // }
+      // finally {
+      //   api.member.edit(self.editItem).then(response => {
+      //     console.log(response)
+      //     self.initData()
+      //   })
+      // }
     },
     processFiles (event) {
       const self = this

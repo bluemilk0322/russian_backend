@@ -33,6 +33,7 @@ export default {
   }
 }
 </script>
+
 <style lang="sass">
 #login
   margin: auto
