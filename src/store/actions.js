@@ -11,6 +11,10 @@ export const actions = {
       commit(types.UPDATE_SLIDER_DATA, data)
     })
 
+    api.news.get().then(data => {
+      commit(types.UPDATE_NEWS_DATA, data)
+    })
+
     api.banner.get().then(data => {
       commit(types.UPDATE_BANNER_DATA, data)
     })

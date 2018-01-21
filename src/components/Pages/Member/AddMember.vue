@@ -30,8 +30,8 @@
         input(style='display:none;', type='file', @change="processFiles($event)")
         | 上傳圖片
       label 預覽圖片
-      .review(v-if="newMember.image.path !== null")
-        img(:src="'http://192.168.88.204:3030' + newMember.image.path")
+      .review(v-if="preview.image !== null")
+        img(:src="preview.image")
       .none(v-else)
         p 尚未上傳圖片
     .form-group
@@ -51,9 +51,11 @@ export default {
         email: null,
         telephone: null,
         type: 'Fulltime',
-        image: {
-          path: null
-        }
+        image: null
+      },
+      preview: {
+        file: null,
+        image: null
       }
     }
   },
@@ -69,18 +71,26 @@ export default {
     }),
     add () {
       const self = this
-      api.member.create(this.newMember).then(response => {
-        self.initData()
+      this.getBase64(this.preview.file).then(data => {
+        self.newMember.image = {uri: data}
+        console.log(self.newMember)
+      }).then(() => {
+        api.member.create(self.newMember).then(response => {
+          console.log(response)
+          self.initData()
+        })
       })
     },
     processFiles (event) {
       const self = this
       const file = event.target.files[0]
-      this.getBase64(file).then(data => {
-        api.banner.create(Array({uri: data})).then(response => {
-          self.newMember.image = response.data[0].file
-        })
-      })
+      this.preview.file = file
+
+      const reader = new FileReader()
+      reader.onload = event => {
+        self.preview.image = event.target.result
+      }
+      reader.readAsDataURL(file)
     },
     getBase64 (file) {
       return new Promise((resolve, reject) => {

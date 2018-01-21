@@ -6,6 +6,7 @@ const link = {
   navigation: root + 'navigation/',
   navigationItem: 'navigation-item/',
   slider: root + 'slider/',
+  news: root + 'news/',
   carousel: root + 'carousel/',
   member: root + 'member/',
   content: root + 'content/',
@@ -71,9 +72,9 @@ export const api = {
         return response
       })
     },
-    edit (data) {
-      const requestLink = link.navigation + data.navigation_id
-      return axios(Method.patch(requestLink, data)).then(response => {
+    edit ({ navigation_id, name }) {
+      const requestLink = link.navigation + navigation_id
+      return axios(Method.patch(requestLink, { navigation_id, name })).then(response => {
         console.log('navigation', 'edit', response)
         return response
       })
@@ -91,8 +92,11 @@ export const api = {
     get () {
 
     },
-    create ({ navigationId, subItem }) {
-
+    create ({ navigation_id, name, content_key }) {
+      return axios(Method.post(link.navigationItem, { navigation_id, name, content_key })).then(response => {
+        console.log('navigationItem', 'create', response)
+        return response
+      })
     },
     edit () {
 
@@ -104,6 +108,27 @@ export const api = {
   slider: {
     get () {
       return axios(Method.get(link.slider)).then(response => {
+        return response.data
+      })
+    }
+  },
+  news: {
+    get () {
+      return axios(Method.get(link.news)).then(response => {
+        console.log('news', 'get', response)
+        return response.data.data
+      })
+    },
+    create ({ title, content }) {
+      return axios(Method.post(link.news, { title, content })).then(response => {
+        console.log('news', 'create', response)
+        return response.data
+      })
+    },
+    edit ({ news_id, title, content }) {
+      const requestLink = link.news + news_id
+      return axios(Method.patch(requestLink, { title, content })).then(response => {
+        console.log('news', 'create', response)
         return response.data
       })
     }
@@ -137,6 +162,7 @@ export const api = {
     },
     edit (data) {
       const requestLink = link.member + data.member_id
+      console.log(Method.patch(requestLink, data))
       return axios(Method.patch(requestLink, data)).then(response => {
         return response
       })

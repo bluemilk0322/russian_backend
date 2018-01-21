@@ -7,6 +7,7 @@ export const state = {
   },
   navigation: [],
   slider: [],
+  news: [],
   banner: [],
   member: [{
     name: 'test1',
@@ -37,5 +38,8 @@ export const mutations = {
   },
   [types.UPDATE_LOGIN_STATUS] (state, loginStatus) {
     state.login = loginStatus
+  },
+  [types.UPDATE_NEWS_DATA] (state, data) {
+    state.news = data
   }
 }

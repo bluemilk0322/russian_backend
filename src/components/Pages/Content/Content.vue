@@ -70,6 +70,24 @@ export default {
       this.editorElement = CKEDITOR.replace(editor, {
         filebrowserUploadUrl: api.single_file_upload.link
       })
+      this.editorElement.on('fileUploadResponse', event => {
+        // Prevent the default response handler.
+        console.log(event)
+        event.stop()
+
+        // Get XHR and response.
+        const data = event.data,
+              xhr = data.fileLoader.xhr,
+              response = xhr.responseText.split( '|' )
+        console.log(response)
+        if (response[1]) {
+          // An error occurred during upload.
+          data.message = response[1]
+          event.cancel()
+        } else {
+          data.url = response[0]
+        }
+      })
     })
   }
 }

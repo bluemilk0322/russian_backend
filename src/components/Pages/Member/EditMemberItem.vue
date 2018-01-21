@@ -26,15 +26,18 @@
           option(value="Administrative") Administrative
           option(value="Tutor") Tutor
       .form-group
-        label image
+        label original image
+        p {{ editItem.image }}
+        img(:src="'http://192.168.88.204:3030' + editItem.image.path", v-if="editItem.image.path !== ''")
+        p(v-else) 無圖片
+      .form-group
+        label edit image
         label.btn.btn-info.form-control
           input(style='display:none;', type='file', @change="processFiles($event)")
-          | 上傳圖片
+          | 修改圖片
         label 預覽圖片
-        .review(v-if="editItem.image.path !== ''")
-          img(:src="'http://192.168.88.204:3030' + editItem.image.path")
-        .none(v-else)
-          p 尚未上傳圖片
+        img(:src="preview.image", v-if="preview.image !== null")
+        p(v-else) 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click="save") 儲存
 </template>
@@ -48,7 +51,11 @@ export default {
   },
   data () {
     return {
-      editItem: Object.assign({}, this.memberItem)
+      editItem: Object.assign({}, this.memberItem),
+      preview: {
+        file: null,
+        image: null
+      }
     }
   },
   methods: {
@@ -57,18 +64,33 @@ export default {
     }),
     save () {
       const self = this
-      api.member.edit(this.editItem).then(response => {
-        self.initData()
-      })
+      try {
+        if (this.preview.file !== null) {
+          this.getBase64(this.preview.file).then(data => {
+            self.editItem.image = {uri: data}
+          })
+        }
+      }
+      catch (error) {
+        console.log(error)
+      }
+      finally {
+        api.member.edit(self.editItem).then(response => {
+          console.log(response)
+          self.initData()
+        })
+      }
     },
     processFiles (event) {
       const self = this
       const file = event.target.files[0]
-      this.getBase64(file).then(data => {
-        api.banner.create(Array({uri: data})).then(response => {
-          self.editItem.image = response.data[0].file
-        })
-      })
+      this.preview.file = file
+
+      const reader = new FileReader()
+      reader.onload = event => {
+        self.preview.image = event.target.result
+      }
+      reader.readAsDataURL(file)
     },
     getBase64 (file) {
       return new Promise((resolve, reject) => {

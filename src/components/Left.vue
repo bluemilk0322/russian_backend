@@ -7,6 +7,7 @@
     nav.nav.flex-column
       router-link.nav-link(to="/navigation") Navigation 修改
       router-link.nav-link(to="/slider") Slider 修改
+      router-link.nav-link(to="/news") News 修改
       router-link.nav-link(to="/banner") Banner 修改
       router-link.nav-link(to="/member") Member 修改
       router-link.nav-link(to="/content") Content 修改

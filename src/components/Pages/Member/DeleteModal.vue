@@ -32,6 +32,7 @@ export default {
       api.member.delete(this.memberItem.member_id).then(response => {
         console.log(response)
         self.initData()
+        $('#delete-member').modal('hide')
       })
     }
   }
