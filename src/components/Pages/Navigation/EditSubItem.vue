@@ -4,10 +4,12 @@
     form
       .form-group
         label name
-        .input-group
-          input.form-control(type='text', v-model="editSubItem.name")
-          .input-group-append
-            button.btn.btn-outline-primary(type='button') 修改
+        input.form-control(type='text', v-model="editSubItem.name")
+      .form-group
+        label contentKey
+        input.form-control(type='text', v-model="editSubItem.content_key")
+      .form-group
+        button.btn.btn-primary(type='button') 修改
 
 </template>
 <script>

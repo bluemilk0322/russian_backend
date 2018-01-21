@@ -31,7 +31,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions({})
+    ...mapActions({
+      initData: 'initData'
+    }),
+    deleteNavigation (navigation_id) {
+      const self = this
+      api.navigation.delete({ navigation_id }).then(response => {
+        self.initData()
+      })
+    }
   }
 }
 </script>

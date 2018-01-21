@@ -12,7 +12,7 @@
       //-   input.form-control
       .form-group
         label 內容
-        textarea.form-control(rows=5)(v-model="content")
+        textarea.form-control(rows=5, v-model="content")
       .form-group
         button.btn.btn-primary(@click="add") 送出
 </template>

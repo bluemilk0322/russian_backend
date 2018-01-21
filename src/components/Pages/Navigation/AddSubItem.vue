@@ -18,7 +18,7 @@ import { api } from '../../../api'
 
 export default {
   props: {
-    navigation_id: Number
+    navigationId: Number
   },
   data () {
     return {
@@ -33,11 +33,11 @@ export default {
     add () {
       const self = this
       const data = {
-        navigation_id: this.navigation_id,
+        navigation_id: this.navigationId,
         name: this.name,
         content_key: this.contentKey
       }
-      api.navigation_id.create(data).then(response => {
+      api.navigationItem.create(data).then(response => {
         self.initData()
       })
     }

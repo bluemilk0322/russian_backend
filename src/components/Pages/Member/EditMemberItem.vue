@@ -27,7 +27,6 @@
           option(value="Tutor") Tutor
       .form-group
         label original image
-        p {{ editItem.image }}
         img(:src="'http://192.168.88.204:3030' + editItem.image.path", v-if="editItem.image.path !== ''")
         p(v-else) 無圖片
       .form-group
@@ -79,25 +78,8 @@ export default {
         self.initData()
       })
       .catch(err => {
-        console.error(err);
+        console.error(err)
       })
-      
-      // try {
-      //   if (this.preview.file !== null) {
-      //     this.getBase64(this.preview.file).then(data => {
-      //       self.editItem.image = {uri: data}
-      //     })
-      //   }
-      // }
-      // catch (error) {
-      //   console.log(error)
-      // }
-      // finally {
-      //   api.member.edit(self.editItem).then(response => {
-      //     console.log(response)
-      //     self.initData()
-      //   })
-      // }
     },
     processFiles (event) {
       const self = this

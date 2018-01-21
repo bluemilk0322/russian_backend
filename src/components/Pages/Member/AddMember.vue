@@ -71,14 +71,22 @@ export default {
     }),
     add () {
       const self = this
-      this.getBase64(this.preview.file).then(data => {
-        self.newMember.image = {uri: data}
-        console.log(self.newMember)
-      }).then(() => {
-        api.member.create(self.newMember).then(response => {
-          console.log(response)
-          self.initData()
-        })
+      return new Promise((resolve, reject) => {
+        if (self.preview.file !== null) {
+          self.getBase64(self.preview.file).then(data => {resolve(data)});
+        }
+        else resolve();
+      })
+      .then(data => {
+        if (data) self.newMember.image = {uri: data}
+        return api.member.create(self.newMember)
+      })
+      .then(response => {
+        console.log(response)
+        self.initData()
+      })
+      .catch(err => {
+        console.error(err)
       })
     },
     processFiles (event) {

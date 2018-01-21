@@ -4,7 +4,7 @@ const root = 'http://192.168.88.204:3030/api/'
 
 const link = {
   navigation: root + 'navigation/',
-  navigationItem: 'navigation-item/',
+  navigationItem: root + 'navigation-item/',
   slider: root + 'slider/',
   news: root + 'news/',
   carousel: root + 'carousel/',
@@ -79,8 +79,8 @@ export const api = {
         return response
       })
     },
-    delete ({ navigationId }) {
-      const requestLink = link.navigation + navigationId
+    delete ({ navigation_id }) {
+      const requestLink = link.navigation + navigation_id
       console.log(requestLink)
       return axios(Method.delete(requestLink)).then(response => {
         console.log('navigation', 'delete', response)
@@ -93,6 +93,7 @@ export const api = {
 
     },
     create ({ navigation_id, name, content_key }) {
+      console.log({ navigation_id, name, content_key })
       return axios(Method.post(link.navigationItem, { navigation_id, name, content_key })).then(response => {
         console.log('navigationItem', 'create', response)
         return response

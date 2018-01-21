@@ -9,10 +9,13 @@
           .input-group-append
             button.btn.btn-outline-primary(type='button', @click="editNavigationName(editNavigation)") 修改
       .form-group
-        SubItem
+        AddSubItem(:navigationId="navigation.navigation_id")
+        SubItemList(:subItems="navigation.subItems")
 </template>
 <script>
-import SubItem from './SubItem'
+// import SubItem from './SubItem'
+import AddSubItem from './AddSubItem'
+import SubItemList from './SubItemList'
 import { api } from '../../../api'
 import { mapActions } from 'vuex'
 
@@ -21,7 +24,8 @@ export default {
     navigation: Object
   },
   components: {
-    SubItem
+    AddSubItem,
+    SubItemList
   },
   data () {
     return {
