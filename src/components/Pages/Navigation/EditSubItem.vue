@@ -9,10 +9,13 @@
         label contentKey
         input.form-control(type='text', v-model="editSubItem.content_key")
       .form-group
-        button.btn.btn-primary(type='button') 修改
+        button.btn.btn-primary(@click="save", type='button') 修改
 
 </template>
 <script>
+import { mapActions } from "vuex"
+import { api } from '../../../api'
+
 export default {
   props: {
     subItem: Object
@@ -20,6 +23,23 @@ export default {
   data () {
     return {
       editSubItem: Object.assign({}, this.subItem)
+    }
+  },
+  methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
+    save () {
+      const self = this
+      const data = {
+        navigation_item_id: this.subItem.navigation_item_id,
+        navigation_id: this.subItem.navigation_id,
+        name: this.editSubItem.name,
+        content_key: this.editSubItem.content_key
+      }
+      api.navigationItem.edit(data).then(response => {
+        self.initData()
+      })
     }
   }
 }

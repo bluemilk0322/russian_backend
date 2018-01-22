@@ -7,6 +7,8 @@ import Banner from '../components/Pages/Banner/Banner.vue'
 import Member from '../components/Pages/Member/Member.vue'
 import Content from '../components/Pages/Content/Content.vue'
 import Admission from '../components/Pages/Admission/Admission.vue'
+import Video from '../components/Pages/Video/Video.vue'
+import Album from '../components/Pages/Album/Album.vue'
 
 Vue.use(Router)
 
@@ -46,6 +48,16 @@ export default new Router({
       path: '/admission',
       name: 'Admission',
       component: Admission
+    },
+    {
+      path: '/video',
+      name: 'Video',
+      component: Video
+    },
+    {
+      path: '/album',
+      name: 'Album',
+      component: Album
     },
     {
       path: '/*',

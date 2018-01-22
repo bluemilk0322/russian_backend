@@ -6,12 +6,14 @@
       .title Administrator
     nav.nav.flex-column
       router-link.nav-link(to="/navigation") Navigation 修改
-      router-link.nav-link(to="/slider") Slider 修改
+      //- router-link.nav-link(to="/slider") Slider 修改
       router-link.nav-link(to="/news") News 修改
       router-link.nav-link(to="/banner") Banner 修改
       router-link.nav-link(to="/member") Member 修改
       router-link.nav-link(to="/content") Content 修改
       router-link.nav-link(to="/admission") Admission 管理
+      router-link.nav-link(to="/video") Video
+      router-link.nav-link(to="/album") Album
       a.nav-link(href="", @click="logout") 登出
 </template>
 <script>

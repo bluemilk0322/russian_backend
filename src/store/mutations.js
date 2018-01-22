@@ -9,12 +9,11 @@ export const state = {
   slider: [],
   news: [],
   banner: [],
-  member: [{
-    name: 'test1',
-    member_id: 123
-  }],
+  member: [],
   content: [],
-  admission: []
+  admission: [],
+  video: [],
+  album: []
 }
 
 export const mutations = {
@@ -41,5 +40,11 @@ export const mutations = {
   },
   [types.UPDATE_NEWS_DATA] (state, data) {
     state.news = data
+  },
+  [types.UPDATE_VIDEO_DATA] (state, data) {
+    state.video = data
+  },
+  [types.UPDATE_ALBUM_DATA] (state, data) {
+    state.album = data
   }
 }

@@ -9,14 +9,15 @@
           h4.title {{ subItem.name }}
           .actions
             .btn-group(role='group', aria-label='actions')
-              button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#subItem-` + subItem.name + `-` + subItem.id') 編輯
-              button.btn.btn-danger(type='button') 刪除
-        .bottom.collapse(:id="`subItem-` + subItem.name + `-` + subItem.id")
+              button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#subItem-` + subItem.navigation_item_id') 編輯
+              button.btn.btn-danger(@click="deleteSubItem(subItem.navigation_item_id)", type='button') 刪除
+        .bottom.collapse(:id="`subItem-` + subItem.navigation_item_id")
           EditSubItem(:subItem="subItem")
 
 </template>
 <script>
-import { mapState } from "vuex"
+import { mapActions } from "vuex"
+import { api } from '../../../api'
 import EditSubItem from './EditSubItem'
 
 export default {
@@ -25,6 +26,17 @@ export default {
   },
   components: {
     EditSubItem
+  },
+  methods: {
+    ...mapActions({
+      initData: 'initData'
+    }),
+    deleteSubItem (navigation_item_id) {
+      const self = this
+      api.navigationItem.delete({ navigation_item_id }).then(resopnse => {
+        self.initData()
+      })
+    }
   }
 }
 </script>

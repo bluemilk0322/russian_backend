@@ -30,6 +30,14 @@ export const actions = {
     api.admission.get().then(data => {
       commit(types.UPDATE_ADMISSION_DATA, data)
     })
+
+    api.video.get().then(data => {
+      commit(types.UPDATE_VIDEO_DATA, data)
+    })
+
+    api.album.get().then(data => {
+      commit(types.UPDATE_ALBUM_DATA, data)
+    })
   },
   saveStatus ({ commit, state, dispatch }) {
     localStorage.setItem('login_status', JSON.stringify(state.login))
