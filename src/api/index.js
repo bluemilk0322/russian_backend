@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const root = 'http://192.168.88.204:3030/api/'
+const root = 'http://59.127.194.172:3030/api/'
+const zh_root = 'http://192.168.88.204:3030/api/'
+const en_root = 'http://192.168.88.204:3030/api/'
+const ru_root = 'http://192.168.88.204:3030/api/'
 
 const links = {
   navigation: root + 'navigation/',
@@ -22,6 +25,45 @@ const links = {
   event_highlight: root + 'event-highlight/'
 }
 
+const zh_link = {
+  navigation: zh_root + 'navigation/',
+  navigationItem: zh_root + 'navigation-item/',
+  slider: zh_root + 'slider/',
+  news: zh_root + 'news/',
+  carousel: zh_root + 'carousel/',
+  member: zh_root + 'member/',
+  content: zh_root + 'content/',
+  admission: zh_root + 'admission/',
+  banner: zh_root + 'banner/',
+  winning: zh_root + 'winning/',
+  news: zh_root + 'news/',
+  file: zh_root + 'file/',
+  user: zh_root + 'user/',
+  single_file_upload: zh_root + 'single_file_upload/',
+  video: zh_root + 'video/',
+  album: zh_root + 'album/',
+  event_highlight: zh_root + 'event-highlight/'
+}
+
+const linasdks = {
+  navigation: root + 'navigation/',
+  navigationItem: root + 'navigation-item/',
+  slider: root + 'slider/',
+  news: root + 'news/',
+  carousel: root + 'carousel/',
+  member: root + 'member/',
+  content: root + 'content/',
+  admission: root + 'admission/',
+  banner: root + 'banner/',
+  winning: root + 'winning/',
+  news: root + 'news/',
+  file: root + 'file/',
+  user: root + 'user/',
+  single_file_upload: root + 'single_file_upload/',
+  video: root + 'video/',
+  album: root + 'album/',
+  event_highlight: root + 'event-highlight/'
+}
 class Method {
   static get (link) {
     return {

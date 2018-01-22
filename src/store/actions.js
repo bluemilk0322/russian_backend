@@ -3,6 +3,17 @@ import { api } from '../api'
 
 export const actions = {
   initData ({ commit, state, dispatch }) {
+    switch (state.lang) {
+      case 'tw':
+        console.log('tw')
+        break;
+      case 'en':
+        console.log('en')
+        break;
+      case 'ru':
+        console.log('ru')
+        break;
+    }
     api.navigation.get().then(data => {
       commit(types.UPDATE_NAVIGATION_DATA, data)
     })

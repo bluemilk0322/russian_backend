@@ -27,7 +27,7 @@
           option(value="Tutor") Tutor
       .form-group
         label original image
-        img(:src="'http://192.168.88.204:3030' + editItem.image.path", v-if="editItem.image.path !== ''")
+        img(:src="'http://59.127.194.172:3030' + editItem.image.path", v-if="editItem.image.path !== ''")
         p(v-else) 無圖片
       .form-group
         label edit image

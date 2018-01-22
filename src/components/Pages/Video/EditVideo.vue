@@ -13,7 +13,7 @@
         input.form-control(v-model="editVideo.link")
       .form-group
         label current image
-        img(:src="`http://192.168.88.204:3030` + editVideo.image.path")
+        img(:src="`http://59.127.194.172:3030` + editVideo.image.path")
       .form-group
         label.btn.btn-info.form-control
           input(style='display:none;', type='file', @change="processFiles($event)")

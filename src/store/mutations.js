@@ -1,6 +1,7 @@
 import { types } from './mutations_types'
 
 export const state = {
+  lang: 'tw',
   login: {
     session: '',
     user: ''
@@ -46,5 +47,8 @@ export const mutations = {
   },
   [types.UPDATE_ALBUM_DATA] (state, data) {
     state.album = data
+  },
+  ['switchLang'] (state, lang) {
+    state.lang = lang
   }
 }
