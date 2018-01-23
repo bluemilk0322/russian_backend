@@ -9,7 +9,7 @@
       input.form-control(v-model="editNews.created_on", disabled=true)
     .form-group
       label content
-      textarea.form-control(v-model="editNews.content")
+      textarea(:id="`news-editor-` + news.news_id")
     .form-group
       button.btn.btn-primary(@click="edit") 送出
 </template>
@@ -35,13 +35,23 @@ export default {
       const data = {
         news_id: this.news.news_id,
         title: this.editNews.title,
-        content: this.editNews.content
+        content: this.editorElement.getData()
       }
       api.news.edit(data).then(response => {
         console.log(response)
         self.initData()
       })
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      CKEDITOR.config.height = '1000px'
+      const editor = document.getElementById('news-editor-' + this.news.news_id)
+      this.editorElement = CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: api.single_file_upload.link
+      })
+      this.editorElement.setData(this.news.content)
+    })
   }
 }
 </script>

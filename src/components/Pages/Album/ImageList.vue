@@ -21,15 +21,14 @@ export default {
     uploadImage (event) {
       const self = this
       const files = event.target.files
-      let items = []
+      let items = Array()
       return new Promise((resolve, reject) => {
         for (let index = 0; index < files.length; index++) {
           self.getBase64(files[index]).then(data => {
             const image = {
               album_id: self.album.album_id,
-              file: {
-                uri: data
-              }
+              uri: data,
+              description: 'test'
             }
             items.push(image)
           })
@@ -38,23 +37,16 @@ export default {
       })
       .then(items => {
         if (items) {
-          console.log(items)
           return api.event_highlight.create(items)
         }
       })
       .then(response => {
+        console.log(response)
         self.initData()
       })
       .catch(err => {
         console.error(err)
       })
-      // this.preview.file = file
-
-      // const reader = new FileReader()
-      // reader.onload = event => {
-      //   self.preview.image = event.target.result
-      // }
-      // reader.readAsDataURL(file)
     },
     getBase64 (file) {
       return new Promise((resolve, reject) => {

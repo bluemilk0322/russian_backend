@@ -12,7 +12,7 @@
           li.list-group-item(v-for="contentTitle in filterList")
             h5 {{ contentTitle }}
             button.btn.btn-primary(@click="editContent(contentTitle)") 編輯
-    textarea#editor(name='editor')
+    textarea#content-editor(name='content-editor')
       p 請選擇文章
     .actions
       button.btn.btn-primary(@click="saveContent") 儲存
@@ -66,7 +66,7 @@ export default {
   mounted () {
     this.$nextTick(() => {
       CKEDITOR.config.height = '1000px'
-      const editor = document.getElementById('editor')
+      const editor = document.getElementById('content-editor')
       this.editorElement = CKEDITOR.replace(editor, {
         filebrowserUploadUrl: api.single_file_upload.link
       })
