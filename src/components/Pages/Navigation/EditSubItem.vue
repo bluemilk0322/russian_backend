@@ -9,6 +9,9 @@
         label contentKey
         input.form-control(type='text', v-model="editSubItem.content_key")
       .form-group
+        label order
+        input.form-control(type='number', v-model.number="editSubItem.order", min=0)
+      .form-group
         button.btn.btn-primary(@click="save", type='button') 修改
 
 </template>
@@ -35,7 +38,8 @@ export default {
         navigation_item_id: this.subItem.navigation_item_id,
         navigation_id: this.subItem.navigation_id,
         name: this.editSubItem.name,
-        content_key: this.editSubItem.content_key
+        content_key: this.editSubItem.content_key,
+        order: this.editSubItem.order
       }
       api.navigationItem.edit(data).then(response => {
         self.initData()

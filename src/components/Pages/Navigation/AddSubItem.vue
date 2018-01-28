@@ -10,6 +10,9 @@
       label 欲連結之文章
       input.form-control(v-model="contentKey", type='text', placeholder="請輸入欲連結文章名")
     .form-group
+      label order
+      input.form-control(v-model.number="order", type='number', placeholder="order", min=0)
+    .form-group
       button.btn.btn-primary(@click="add", type='button') 新增
 </template>
 <script>
@@ -23,7 +26,8 @@ export default {
   data () {
     return {
       name: null,
-      contentKey: null
+      contentKey: null,
+      order: null
     }
   },
   methods: {
@@ -35,7 +39,8 @@ export default {
       const data = {
         navigation_id: this.navigationId,
         name: this.name,
-        content_key: this.contentKey
+        content_key: this.contentKey,
+        order: this.order
       }
       api.navigationItem.create(data).then(response => {
         self.initData()

@@ -4,10 +4,12 @@
     form
       .form-group
         label name
-        .input-group
-          input.form-control(type='text', v-model="editNavigation.name")
-          .input-group-append
-            button.btn.btn-outline-primary(type='button', @click="editNavigationName(editNavigation)") 修改
+        input.form-control(type='text', v-model="editNavigation.name")
+      .form-group
+        label order
+        input.form-control(type='number', v-model.number="editNavigation.order", min=0)
+      .form-group
+        button.btn.btn-primary(type='button', @click="editNavigationName(editNavigation)") 修改
       .form-group
         AddSubItem(:navigationId="navigation.navigation_id")
         SubItemList(:subItems="navigation.subItems")
