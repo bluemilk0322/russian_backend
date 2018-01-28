@@ -10,11 +10,16 @@
       .form-group
         label content
         input.form-control(v-model="newAlbum.content")
+      .form-group.card
+        .card-header
+          label.btn.btn-info.form-control
+            input(style='display:none;', multiple=true, type='file', @change="uploadImage($event)")
+            | add picture
+        .card-body {{ pics }}
       .form-group
         button.btn.btn-primary(@click="add") send
 </template>
 <script>
-import { mapActions } from 'vuex'
 import { api } from '../../../api'
 
 export default {
@@ -23,18 +28,28 @@ export default {
       newAlbum: {
         title: null,
         content: null
-      }
+      },
+      pics: []
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
+    // ...mapActions({
+    //   initData: 'initData'
+    // }),
     add () {
       const self = this
-      api.album.create(this.newAlbum).then(response => {
-        self.initData()
-      })
+      api.album.create(this.newAlbum)
+        .then(response => {
+          // self.initData()
+          console.log(response)
+        })
+        .then()
+    },
+    uploadImage (event) {
+      const self = this
+      const files = event.target.files
+      this.testMixin()
+      this.initData()
     }
   }
 }

@@ -151,6 +151,12 @@ export const api = {
         console.log('news', 'create', response)
         return response.data
       })
+    },
+    delete ({ news_id }) {
+      const requestLink = links.news + news_id
+      return axios(Method.delete(requestLink)).then(response => {
+        return response
+      })
     }
   },
   banner: {

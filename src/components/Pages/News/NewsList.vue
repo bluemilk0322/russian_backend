@@ -17,6 +17,7 @@
           EditNews(:news="news")
 </template>
 <script>
+import { api } from '../../../api'
 import { mapState } from "vuex"
 import EditNews from './EditNews'
 
@@ -39,6 +40,14 @@ export default {
       })
       return sortedList.filter(news => {
         return news.title.includes(this.search)
+      })
+    }
+  },
+  methods: {
+    deleteNews (news) {
+      const self = this
+      api.news.delete(news).then(response => {
+        self.initData()
       })
     }
   }
