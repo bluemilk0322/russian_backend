@@ -15,9 +15,12 @@
           label.btn.btn-info.form-control
             input(style='display:none;', multiple=true, type='file', @change="uploadImage($event)")
             | add picture
-        .card-body {{ pics }}
+        .card-body
+          .pic(v-for="(pic, index) in preview")
+            img(:src="pic", width="300px")
+            button.btn.btn-danger(@click="deletePic(index)") delete
       .form-group
-        button.btn.btn-primary(@click="add") send
+        button.btn.btn-primary(@click="create") send
 </template>
 <script>
 import { api } from '../../../api'
@@ -29,31 +32,47 @@ export default {
         title: null,
         content: null
       },
-      pics: []
+      preview: []
     }
   },
   methods: {
     // ...mapActions({
     //   initData: 'initData'
     // }),
-    add () {
+    create () {
       const self = this
       api.album.create(this.newAlbum)
         .then(response => {
-          // self.initData()
-          console.log(response)
+          const album_id = response.data.album_id
+          const items = this.preview.map(pic => {
+            return {
+              album_id: album_id,
+              uri: pic
+            }
+          })
+          console.log(items)
+          api.event_highlight.create(items)
         })
-        .then()
     },
     uploadImage (event) {
       const self = this
       const files = event.target.files
-      this.testMixin()
-      this.initData()
+      for (let index = 0; index < files.length; index++) {
+        this.getBase64(files[index]).then(data => {
+          self.preview.push(data)
+        })
+      }
+    },
+    deletePic (index) {
+      this.preview.splice(index, 1)
     }
   }
 }
 </script>
 <style lang="sass" scoped>
-
+.pic
+  position: relative
+  button
+    position: absolute
+    top: 50%
 </style>

@@ -2,9 +2,12 @@
 .image-list.card
   .card-header
     label.btn.btn-info.form-control
-      input(style='display:none;', multiple=true, type='file', @change="uploadImage($event)")
-      | 新增圖片
-  .card-body {{ album }}
+      input(style='display:none;', multiple=true, type='file', @change="add($event)")
+      | add picture
+  .card-body
+    .pic(v-for="(imageData, index) in editImages")
+      img(:src="parsePath(imageData)", width="300px")
+      button.btn.btn-danger(@click="deleteImage(imageData, index)") delete
 </template>
 <script>
 import { mapActions, mapState } from "vuex"
@@ -12,25 +15,41 @@ import { api } from '../../../api'
 
 export default {
   props: {
-    album: Object
+    images: Array,
+    album_id: Number
+  },
+  data () {
+    return {
+      editImages: this.images.slice(0)
+    }
   },
   methods: {
     ...mapActions({
       initData: 'initData'
     }),
-    uploadImage (event) {
+    add (event) {
       const self = this
       const files = event.target.files
-      const file = files[0]
-      self.getBase64(file).then(data => {
-        const items = [
-          {
-            album_id: 1,
+      for (let index = 0; index < files.length; index++) {
+        this.getBase64(files[index]).then(data => {
+          const imageData = {
+            album_id: self.album_id,
             uri: data
           }
-        ]
-        api.event_highlight.create(items)
-      })
+          self.editImages.push(imageData)
+          self.$emit('addImage', imageData)
+        })
+      }
+      // const file = files[0]
+      // this.getBase64(file).then(data => {
+      //   const items = [
+      //     {
+      //       album_id: 1,
+      //       uri: data
+      //     }
+      //   ]
+      //   api.event_highlight.create(items)
+      // })
       // let items = []
       // console.log(items, typeof items)
       // for (let index = 0; index < files.length; index++) {
@@ -71,19 +90,26 @@ export default {
       //   console.error(err)
       // })
     },
-    getBase64 (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = error => reject(error)
-      })
+    deleteImage (imageData, index) {
+      this.editImages.splice(index, 1)
+      this.$emit('deleteImage', imageData)
+    },
+    parsePath (imageData) {
+      if (imageData.path) {
+        return `http://192.168.88.204:3030` + imageData.path
+      }
+      else if (imageData.uri) {
+        return imageData.uri
+      }
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.image-list
-  // border: none
+.pic
+  position: relative
+  button
+    position: absolute
+    top: 50%
 </style>

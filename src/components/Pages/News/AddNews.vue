@@ -13,7 +13,6 @@
       .form-group
         label 內容
         textarea#news-editor(name="news-editor")
-
       .form-group
         button.btn.btn-primary(@click="add") 送出
 </template>

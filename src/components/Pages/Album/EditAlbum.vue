@@ -10,7 +10,7 @@
         input.form-control(v-model="editAlbum.content")
       .form-group
         label images
-        ImageList(:album="editAlbum")
+        ImageList(:images="editAlbum.images", :album_id="editAlbum.album_id", @addImage="addImage", @deleteImage="deleteImage")
       .form-group
         button.btn.btn-primary(@click="save") save
 </template>
@@ -28,7 +28,11 @@ export default {
   },
   data () {
     return {
-      editAlbum: Object.assign({}, this.album)
+      editAlbum: Object.assign({}, this.album),
+      editImage: {
+        add: [],
+        delete: []
+      }
     }
   },
   methods: {
@@ -37,14 +41,40 @@ export default {
     }),
     save () {
       const self = this
-      const data = {
+      const albumData = {
         album_id: this.editAlbum.album_id,
         title: this.editAlbum.title,
         content: this.editAlbum.content
       }
-      api.album.edit(data).then(response => {
+      const addEventHighlightData = this.editImage.add
+      const deleteEventHighlightData = this.editImage.delete
+      return new Promise((resolve, reject) => {
+        return resolve(api.album.edit(albumData))
+      })
+      .then(response => {
+        if (addEventHighlightData.length !== 0)
+          return api.event_highlight.create(addEventHighlightData)
+      })
+      .then(response => {
+        for (let index in deleteEventHighlightData) {
+          const data = {
+            event_highlight_id: deleteEventHighlightData[index].event_highlight_id
+          }
+          api.event_highlight.delete(data)
+        }
+        return self
+      })
+      .then(self => {
         self.initData()
       })
+    },
+    deleteImage (imageData) {
+      // for component ImageList
+      this.editImage.delete.push(imageData)
+    },
+    addImage (imageData) {
+      // for component ImageList
+      this.editImage.add.push(imageData)
     }
   }
 }

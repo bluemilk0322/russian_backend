@@ -76,18 +76,15 @@ export const api = {
         return response.data
       })
     },
-    create ({ name }) {
-      const data = {
-        name: name
-      }
-      return axios(Method.post(links.navigation, data)).then(response => {
+    create ({ name, order }) {
+      return axios(Method.post(links.navigation, { name, order })).then(response => {
         console.log('navigation', 'create', response)
         return response
       })
     },
-    edit ({ navigation_id, name }) {
+    edit ({ navigation_id, name, order }) {
       const requestLink = links.navigation + navigation_id
-      return axios(Method.patch(requestLink, { navigation_id, name })).then(response => {
+      return axios(Method.patch(requestLink, { navigation_id, name, order })).then(response => {
         console.log('navigation', 'edit', response)
         return response
       })
@@ -105,16 +102,16 @@ export const api = {
     get () {
 
     },
-    create ({ navigation_id, name, content_key }) {
+    create ({ navigation_id, name, content_key, order }) {
       console.log({ navigation_id, name, content_key })
-      return axios(Method.post(links.navigationItem, { navigation_id, name, content_key })).then(response => {
+      return axios(Method.post(links.navigationItem, { navigation_id, name, content_key, order })).then(response => {
         console.log('navigationItem', 'create', response)
         return response
       })
     },
-    edit ({ navigation_item_id, navigation_id, name, content_key }) {
+    edit ({ navigation_item_id, navigation_id, name, content_key , order }) {
       const requestLink = links.navigationItem + navigation_item_id
-      return axios(Method.patch(requestLink, { navigation_id, name, content_key })).then(response => {
+      return axios(Method.patch(requestLink, { navigation_item_id, navigation_id, name, content_key , order })).then(response => {
         return response
       })
     },
