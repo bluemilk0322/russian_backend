@@ -8,6 +8,9 @@
       label created_on
       input.form-control(v-model="editNews.created_on", disabled=true)
     .form-group
+      label type
+      input.form-control(v-model="editNews.type")
+    .form-group
       label content
       textarea(:id="`news-editor-` + news.news_id")
     .form-group
@@ -35,6 +38,7 @@ export default {
       const data = {
         news_id: this.news.news_id,
         title: this.editNews.title,
+        type: this.editNews.type,
         content: this.editorElement.getData()
       }
       api.news.edit(data).then(response => {

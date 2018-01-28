@@ -7,12 +7,13 @@
       .form-group
         label 標題
         input.form-control(v-model="title")
-      //- .form-group
-      //-   label 日期
-      //-   input.form-control
+      .form-group
+        label 類型
+        input.form-control(v-model="type")
       .form-group
         label 內容
         textarea#news-editor(name="news-editor")
+
       .form-group
         button.btn.btn-primary(@click="add") 送出
 </template>
@@ -24,7 +25,8 @@ export default {
   data () {
     return {
       title: null,
-      content: null
+      content: null,
+      type: null
     }
   },
   methods: {
@@ -34,6 +36,7 @@ export default {
     add () {
       const data = {
         title: this.title,
+        type: this.type,
         content: this.editorElement.getData()
       }
       api.news.create(data).then(response => {

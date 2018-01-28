@@ -135,20 +135,17 @@ export const api = {
   news: {
     get () {
       return axios(Method.get(links.news)).then(response => {
-        console.log('news', 'get', response)
         return response.data.data
       })
     },
-    create ({ title, content }) {
-      return axios(Method.post(links.news, { title, content })).then(response => {
-        console.log('news', 'create', response)
+    create ({ title, type, content }) {
+      return axios(Method.post(links.news, { title, type, content })).then(response => {
         return response.data
       })
     },
-    edit ({ news_id, title, content }) {
+    edit ({ news_id, title, type, content }) {
       const requestLink = links.news + news_id
-      return axios(Method.patch(requestLink, { title, content })).then(response => {
-        console.log('news', 'create', response)
+      return axios(Method.patch(requestLink, { title, type, content })).then(response => {
         return response.data
       })
     },
