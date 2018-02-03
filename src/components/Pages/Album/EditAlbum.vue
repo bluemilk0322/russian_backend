@@ -17,7 +17,6 @@
 <script>
 import ImageList from './ImageList'
 import { mapActions } from "vuex"
-import { api } from '../../../api'
 
 export default {
   components: {
@@ -36,45 +35,57 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    save () {
-      const self = this
-      const albumData = {
+    ...mapActions('album', ['update']),
+    async save () {
+      const albumData = await {
         album_id: this.editAlbum.album_id,
         title: this.editAlbum.title,
         content: this.editAlbum.content
       }
-      const addEventHighlightData = this.editImage.add
-      const deleteEventHighlightData = this.editImage.delete
-      return new Promise((resolve, reject) => {
-        return resolve(api.album.edit(albumData))
-      })
-      .then(response => {
-        if (addEventHighlightData.length !== 0)
-          return api.event_highlight.create(addEventHighlightData)
-      })
-      .then(response => {
-        for (let index in deleteEventHighlightData) {
-          const data = {
-            event_highlight_id: deleteEventHighlightData[index].event_highlight_id
-          }
-          api.event_highlight.delete(data)
+      await this.$api.album.edit(albumData)
+
+      const addEventHighlightData = await this.editImage.add
+      const deleteEventHighlightData = await this.editImage.delete
+
+      if (addEventHighlightData.length !== 0)
+        await this.$api.event_highlight.create(addEventHighlightData)
+
+      for (let index in deleteEventHighlightData) {
+        const data = await {
+          event_highlight_id: deleteEventHighlightData[index].event_highlight_id
         }
-        return self
-      })
-      .then(self => {
-        self.initData()
-      })
+        this.$api.eventHighlight.delete(data)
+      }
+
+      await this.update(this.$api.album)
+
+      // return new Promise((resolve, reject) => {
+      //   return resolve(api.album.edit(albumData))
+      // })
+      // .then(response => {
+      //   if (addEventHighlightData.length !== 0)
+      //     return api.event_highlight.create(addEventHighlightData)
+      // })
+      // .then(response => {
+      //   for (let index in deleteEventHighlightData) {
+      //     const data = {
+      //       event_highlight_id: deleteEventHighlightData[index].event_highlight_id
+      //     }
+      //     api.event_highlight.delete(data)
+      //   }
+      //   return self
+      // })
+      // .then(self => {
+      //   self.initData()
+      // })
     },
-    deleteImage (imageData) {
+    async deleteImage (imageData) {
       // for component ImageList
-      this.editImage.delete.push(imageData)
+      await this.editImage.delete.push(imageData)
     },
-    addImage (imageData) {
+    async addImage (imageData) {
       // for component ImageList
-      this.editImage.add.push(imageData)
+      await this.editImage.add.push(imageData)
     }
   }
 }

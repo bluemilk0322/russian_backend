@@ -23,8 +23,6 @@
         button.btn.btn-primary(@click="create") send
 </template>
 <script>
-import { api } from '../../../api'
-
 export default {
   data () {
     return {
@@ -36,35 +34,38 @@ export default {
     }
   },
   methods: {
-    // ...mapActions({
-    //   initData: 'initData'
-    // }),
-    create () {
-      const self = this
-      api.album.create(this.newAlbum)
-        .then(response => {
-          const album_id = response.data.album_id
-          const items = this.preview.map(pic => {
-            return {
-              album_id: album_id,
-              uri: pic
-            }
-          })
-          console.log(items)
-          api.event_highlight.create(items)
-        })
+    async create () {
+      const response = await this.$api.album.create(this.newAlbum)
+      const album_id = await response.data.album_id
+      const items = await this.preview.map(async pic => {
+        return await {
+          album_id: album_id,
+          uri: pic
+        }
+      })
+      await this.$api.event_highlight.create(items)
+        // .then(response => {
+        //   const album_id = response.data.album_id
+        //   const items = this.preview.map(pic => {
+        //     return {
+        //       album_id: album_id,
+        //       uri: pic
+        //     }
+        //   })
+        //   self.$api.event_highlight.create(items)
+        // })
     },
-    uploadImage (event) {
-      const self = this
-      const files = event.target.files
+    async uploadImage (event) {
+      const self = await this
+      const files = await event.target.files
       for (let index = 0; index < files.length; index++) {
-        this.getBase64(files[index]).then(data => {
+        await this.getBase64(files[index]).then(async data => {
           self.preview.push(data)
         })
       }
     },
-    deletePic (index) {
-      this.preview.splice(index, 1)
+    async deletePic (index) {
+      await this.preview.splice(index, 1)
     }
   }
 }

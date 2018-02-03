@@ -10,9 +10,6 @@
       button.btn.btn-danger(@click="deleteImage(imageData, index)") delete
 </template>
 <script>
-import { mapActions, mapState } from "vuex"
-import { api } from '../../../api'
-
 export default {
   props: {
     images: Array,
@@ -24,21 +21,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    add (event) {
-      const self = this
-      const files = event.target.files
+    async add (event) {
+      const files = await event.target.files
       for (let index = 0; index < files.length; index++) {
-        this.getBase64(files[index]).then(data => {
-          const imageData = {
-            album_id: self.album_id,
-            uri: data
-          }
-          self.editImages.push(imageData)
-          self.$emit('addImage', imageData)
-        })
+        const data = await this.getBase64(files[index])
+        const imageData = await {
+          album_id: self.album_id,
+          uri: data
+        }
+        await this.editImages.push(imageData)
+        await this.$emit('addImage', imageData)
       }
       // const file = files[0]
       // this.getBase64(file).then(data => {
@@ -90,13 +82,13 @@ export default {
       //   console.error(err)
       // })
     },
-    deleteImage (imageData, index) {
-      this.editImages.splice(index, 1)
-      this.$emit('deleteImage', imageData)
+    async deleteImage (imageData, index) {
+      await this.editImages.splice(index, 1)
+      await this.$emit('deleteImage', imageData)
     },
     parsePath (imageData) {
       if (imageData.path) {
-        return `http://192.168.88.204:3030` + imageData.path
+        return this.$api.rootLink + imageData.path
       }
       else if (imageData.uri) {
         return imageData.uri

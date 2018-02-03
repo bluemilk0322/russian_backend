@@ -13,7 +13,6 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
-import { api } from '../../../api'
 import EditAlbum from './EditAlbum'
 
 export default {
@@ -21,20 +20,21 @@ export default {
     EditAlbum
   },
   computed: {
-    ...mapState({
-      albums: state => state.album.data
+    ...mapState('album', {
+      albums: state => state.data
     })
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    deleteAlbum (album_id) {
-      const self = this
-      api.album.delete({ album_id }).then(response => {
-        self.initData()
-      })
+    ...mapActions('album', ['update']),
+    async deleteAlbum (album_id) {
+      await this.$api.album.delete({ album_id })
+      await this.update(this.$api.album)
     }
+  },
+  mounted () {
+    this.$nextTick(async () => {
+      await this.update(this.$api.album)
+    })
   }
 }
 </script>
