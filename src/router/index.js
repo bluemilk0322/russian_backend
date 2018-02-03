@@ -37,7 +37,7 @@ export default new Router({
     },
     {
       path: '/member',
-      name: 'bember',
+      name: 'member',
       component: Member
     },
     {
