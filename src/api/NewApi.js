@@ -13,34 +13,50 @@ import User from './functions/User'
 import Video from './functions/Video'
 import SingleFileUpload from './functions/SingleFileUpload'
 
-const rootLink = (port) => 'http://192.168.88.204:' + port + '/api/'
-const options = (rootLink) => {
-  return {
-    baseURL: rootLink
-  }
-}
-
 class Api {
   constructor () {
-    this.instance = axios.create(options(rootLink(3030)))
+    this.currentPort = 3030
     this.lang = 'tw'
+  }
+
+  get rootLink () {
+    return 'http://192.168.88.204' + ':' + this.currentPort + '/'
+  }
+
+  get apiLink () {
+    return this.rootLink + 'api/'
+  }
+
+  get options () {
+    return {
+      baseURL: this.apiLink
+    }
+  }
+
+  get instance () {
+    return axios.create(this.options)
+  }
+
+  set port (port) {
+    this.currentPort = port
   }
 
   switchLanguage (language) {
     switch (language) {
       case 'tw':
-        this.instance = axios.create(options(rootLink(3030)))
+        this.port = 3030
         this.lang = 'tw'
         break
       case 'en':
-        this.instance = axios.create(options(rootLink(3031)))
+        this.port = 3031
         this.lang = 'en'
         break
       case 'ru':
-        this.instance = axios.create(options(rootLink(3031)))
+        this.port = 3030
+        this.lang = 'ru'
         break
       default:
-        this.instance = axios.create(options(rootLink(3030)))
+        this.port = 3030
         this.lang = 'tw'
     }
   }
