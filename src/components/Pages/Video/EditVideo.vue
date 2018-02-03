@@ -13,7 +13,7 @@
         input.form-control(v-model="editVideo.link")
       .form-group
         label current image
-        img(:src="`http://59.127.194.172:3030` + editVideo.image.path")
+        img(:src="$api.rootLink + editVideo.image.path")
       .form-group
         label.btn.btn-info.form-control
           input(style='display:none;', type='file', @change="processFiles($event)")
@@ -27,7 +27,6 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import { api } from '../../../api'
 
 export default {
   props: {

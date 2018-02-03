@@ -27,8 +27,7 @@
         button.btn.btn-primary(@click="add") 送出
 </template>
 <script>
-import { api } from '../../../api'
-import { mapActions } from "vuex";
+import { mapActions } from "vuex"
 
 export default {
   data () {
@@ -48,46 +47,41 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    add () {
-      const self = this
-      return new Promise((resolve, reject) => {
-        if (self.preview.file !== null) {
-          self.getBase64(self.preview.file).then(data => {resolve(data)});
-        }
-        else resolve();
-      })
-      .then(data => {
-        if (data) self.newVideo.image = {uri: data}
-        return api.video.create(self.newVideo)
-      })
-      .then(response => {
-        self.initData()
-      })
-      .catch(err => {
-        console.error(err)
-      })
-    },
-    processFiles (event) {
-      const self = this
-      const file = event.target.files[0]
-      this.preview.file = file
-      console.log(this.preview)
-      const reader = new FileReader()
-      reader.onload = event => {
-        self.preview.image = event.target.result
+    ...mapActions('video', ['update']),
+    async add () {
+      // const self = this
+      // return new Promise((resolve, reject) => {
+      //   if (self.preview.file !== null) {
+      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
+      //   }
+      //   else resolve();
+      // })
+      // .then(data => {
+      //   if (data) self.newVideo.image = {uri: data}
+      //   return api.video.create(self.newVideo)
+      // })
+      // .then(response => {
+      //   self.initData()
+      // })
+      // .catch(err => {
+      //   console.error(err)
+      // })
+
+      if (await this.preview.file !== null) {
+        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
       }
-      reader.readAsDataURL(file)
+      await this.$api.video.create(this.newVideo)
+      await this.update(this.$api.video)
     },
-    getBase64 (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = error => reject(error)
-      })
+    async processFiles (event) {
+      const self = this
+      const file = await event.target.files[0]
+      this.preview.file = await file
+      const reader = await new FileReader()
+      reader.onload = async event => {
+        self.preview.image = await event.target.result
+      }
+      await reader.readAsDataURL(file)
     }
   }
 }
