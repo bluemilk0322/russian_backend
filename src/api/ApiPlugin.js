@@ -1,8 +1,8 @@
-import NewApi from './NewApi'
+import Api from '.'
 
 const ApiPlugin = {
   install (Vue, options) {
-    Vue.prototype.$api = new NewApi()
+    Vue.prototype.$api = new Api()
   }
 }
 

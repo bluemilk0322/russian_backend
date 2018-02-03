@@ -1,246 +1,113 @@
 import axios from 'axios'
-import Method from './Method'
 
-const root = 'http://59.127.194.172:3030/api/'
+import Admission from './functions/Admission'
+import Album from './functions/Album'
+import Banner from './functions/Banner'
+import Content from './functions/Content'
+import EventHighlight from './functions/EventHighlight'
+import Member from './functions/Member'
+import Navigation from './functions/Navigation'
+import NavigationItem from './functions/NavigationItem'
+import News from './functions/News'
+import User from './functions/User'
+import Video from './functions/Video'
+import SingleFileUpload from './functions/SingleFileUpload'
 
-const links = {
-  navigation: root + 'navigation/',
-  navigationItem: root + 'navigation-item/',
-  slider: root + 'slider/',
-  news: root + 'news/',
-  carousel: root + 'carousel/',
-  member: root + 'member/',
-  content: root + 'content/',
-  admission: root + 'admission/',
-  banner: root + 'banner/',
-  winning: root + 'winning/',
-  news: root + 'news/',
-  file: root + 'file/',
-  user: root + 'user/',
-  single_file_upload: root + 'single_file_upload/',
-  video: root + 'video/',
-  album: root + 'album/',
-  event_highlight: root + 'event-highlight/'
-}
+class Api {
+  constructor () {
+    this.currentPort = 3030
+    this.lang = 'tw'
+  }
 
-export const api = {
-  navigation: {
-    get () {
-      return axios(Method.get(links.navigation)).then(response => {
-        return response.data
-      })
-    },
-    search ({ navigationId }) {
-      const requestLink = links.navigation + '/' + navigationId
-      return axios(Method.get(requestLink)).then(response => {
-        return response.data
-      })
-    },
-    create ({ name, order }) {
-      return axios(Method.post(links.navigation, { name, order })).then(response => {
-        return response
-      })
-    },
-    edit ({ navigation_id, name, order }) {
-      const requestLink = links.navigation + navigation_id
-      return axios(Method.patch(requestLink, { navigation_id, name, order })).then(response => {
-        return response
-      })
-    },
-    delete ({ navigation_id }) {
-      const requestLink = links.navigation + navigation_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  navigationItem: {
-    get () {
+  get rootLink () {
+    return 'http://192.168.88.204' + ':' + this.currentPort + '/'
+  }
 
-    },
-    create ({ navigation_id, name, content_key, order }) {
-      return axios(Method.post(links.navigationItem, { navigation_id, name, content_key, order })).then(response => {
-        return response
-      })
-    },
-    edit ({ navigation_item_id, navigation_id, name, content_key , order }) {
-      const requestLink = links.navigationItem + navigation_item_id
-      return axios(Method.patch(requestLink, { navigation_item_id, navigation_id, name, content_key , order })).then(response => {
-        return response
-      })
-    },
-    delete ({ navigation_item_id }) {
-      const requestLink = links.navigationItem + navigation_item_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  slider: {
-    get () {
-      return axios(Method.get(links.slider)).then(response => {
-        return response.data
-      })
-    }
-  },
-  news: {
-    get () {
-      return axios(Method.get(links.news)).then(response => {
-        return response.data.data
-      })
-    },
-    create ({ title, type, content }) {
-      return axios(Method.post(links.news, { title, type, content })).then(response => {
-        return response.data
-      })
-    },
-    edit ({ news_id, title, type, content }) {
-      const requestLink = links.news + news_id
-      return axios(Method.patch(requestLink, { title, type, content })).then(response => {
-        return response.data
-      })
-    },
-    delete ({ news_id }) {
-      const requestLink = links.news + news_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  banner: {
-    get () {
-      return axios(Method.get(links.banner)).then(response => {
-        return response.data
-      })
-    },
-    create (files) {
-      return axios(Method.post(links.banner, files)).then(response => {
-        return response
-      })
-      // return axios(Method.patch(links.banner))
-    }
-  },
-  member: {
-    get () {
-      return axios(Method.get(links.member)).then(response => {
-        return response.data
-      })
-    },
-    create (data) {
-      return axios(Method.post(links.member, data)).then(response => {
-        return response
-      })
-    },
-    edit (data) {
-      const requestLink = links.member + data.member_id
-      return axios(Method.patch(requestLink, data)).then(response => {
-        return response
-      })
-    },
-    delete (memberId) {
-      const requestLink = links.member + memberId
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  content: {
-    get () {
-      return axios(Method.get(links.content)).then(response => {
-        return response.data
-      })
-    },
-    edit ({ title, content }) {
-      const data = {
-        key: title,
-        values: Array(content)
-      }
-      return axios(Method.post(links.content, data)).then(response => {
-      })
-    }
-  },
-  admission: {
-    get () {
-      return axios(Method.get(links.admission)).then(response => {
-        return response.data
-      })
-    }
-  },
-  single_file_upload: {
-    link: links.single_file_upload,
-    create (file) {
-      const data = new FormData()
-      data.append('upload', file)
-      return axios(Method.post(links.single_file_upload, data)).then(response => {
-        return response
-      })
-    }
-  },
-  video: {
-    get () {
-      return axios(Method.get(links.video)).then(response => {
-        return response.data
-      })
-    },
-    create ({ title, content, image, link }) {
-      return axios(Method.post(links.video, { title, content, image, link })).then(response => {
-        return response
-      })
-    },
-    edit ({ video_id, title, content, image, link }) {
-      const requestLink = links.video + video_id
-      return axios(Method.patch(requestLink, { title, content, image, link })).then(response => {
-        return response
-      })
-    },
-    delete ({ video_id }) {
-      const requestLink = links.video + video_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  album: {
-    get () {
-      return axios(Method.get(links.album)).then(response => {
-        return response.data
-      })
-    },
-    create ({ title, content }) {
-      return axios(Method.post(links.album, { title, content })).then(response => {
-        return response
-      })
-    },
-    edit ({ album_id, title, content }) {
-      const requestLink = links.album + album_id
-      return axios(Method.patch(requestLink, { title, content })).then(response => {
-        return response
-      })
-    },
-    delete ({ album_id }) {
-      const requestLink = links.album + album_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
-    }
-  },
-  event_highlight: {
-    get () {
+  get apiLink () {
+    return this.rootLink + 'api/'
+  }
 
-    },
-    create (items) {
-      return axios(Method.post(links.event_highlight, items)).then(response => {
-        return response
-      })
-    },
-    edit () {
-
-    },
-    delete ({ event_highlight_id }) {
-      const requestLink = links.event_highlight + event_highlight_id
-      return axios(Method.delete(requestLink)).then(response => {
-        return response
-      })
+  get options () {
+    return {
+      baseURL: this.apiLink
     }
   }
+
+  get instance () {
+    return axios.create(this.options)
+  }
+
+  set port (port) {
+    this.currentPort = port
+  }
+
+  switchLanguage (language) {
+    switch (language) {
+      case 'tw':
+        this.port = 3030
+        this.lang = 'tw'
+        break
+      case 'en':
+        this.port = 3031
+        this.lang = 'en'
+        break
+      case 'ru':
+        this.port = 3030
+        this.lang = 'ru'
+        break
+      default:
+        this.port = 3030
+        this.lang = 'tw'
+    }
+  }
+
+  get admission () {
+    return new Admission(this.instance)
+  }
+
+  get album () {
+    return new Album(this.instance)
+  }
+
+  get banner () {
+    return new Banner(this.instance)
+  }
+
+  get content () {
+    return new Content(this.instance)
+  }
+
+  get eventHighlight () {
+    return new EventHighlight(this.instance)
+  }
+
+  get member () {
+    return new Member(this.instance)
+  }
+
+  get navigation () {
+    return new Navigation(this.instance)
+  }
+
+  get navigationItem () {
+    return new NavigationItem(this.instance)
+  }
+
+  get news () {
+    return new News(this.instance)
+  }
+
+  get user () {
+    return new User(this.instance)
+  }
+
+  get video () {
+    return new Video(this.instance)
+  }
+
+  get singleFileUpload () {
+    return new SingleFileUpload(this.instance)
+  }
 }
+
+export default Api

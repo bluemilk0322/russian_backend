@@ -3,9 +3,6 @@ import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
     async getBase64 (file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader()
