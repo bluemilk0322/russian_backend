@@ -6,7 +6,7 @@ export default {
     ...mapActions({
       initData: 'initData'
     }),
-    getBase64 (file) {
+    async getBase64 (file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader()
         reader.readAsDataURL(file)

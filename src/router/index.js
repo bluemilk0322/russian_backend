@@ -9,6 +9,7 @@ import Content from '../components/Pages/Content/Content.vue'
 import Admission from '../components/Pages/Admission/Admission.vue'
 import Video from '../components/Pages/Video/Video.vue'
 import Album from '../components/Pages/Album/Album.vue'
+import User from '../components/Pages/User/User.vue'
 
 Vue.use(Router)
 
@@ -16,48 +17,53 @@ export default new Router({
   routes: [
     {
       path: '/navigation',
-      name: 'Navigation',
+      name: 'navigation',
       component: Navigation
     },
     {
       path: '/slider',
-      name: 'Slider',
+      name: 'slider',
       component: Slider
     },
     {
       path: '/news',
-      name: News,
+      name: 'news',
       component: News
     },
     {
       path: '/banner',
-      name: 'Banner',
+      name: 'banner',
       component: Banner
     },
     {
       path: '/member',
-      name: 'Member',
+      name: 'bember',
       component: Member
     },
     {
       path: '/content',
-      name: 'Content',
+      name: 'content',
       component: Content
     },
     {
       path: '/admission',
-      name: 'Admission',
+      name: 'admission',
       component: Admission
     },
     {
       path: '/video',
-      name: 'Video',
+      name: 'video',
       component: Video
     },
     {
       path: '/album',
-      name: 'Album',
+      name: 'album',
       component: Album
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User
     },
     {
       path: '/*',

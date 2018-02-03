@@ -18,7 +18,6 @@
 // import SubItem from './SubItem'
 import AddSubItem from './AddSubItem'
 import SubItemList from './SubItemList'
-import { api } from '../../../api'
 import { mapActions } from 'vuex'
 
 export default {
@@ -35,14 +34,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    editNavigationName (editNavigation) {
-      const self = this
-      api.navigation.edit(editNavigation).then(response => {
-        self.initData()
-      })
+    ...mapActions('navigation', ['update']),
+    async editNavigationName (editNavigation) {
+      await this.$api.navigation.edit(editNavigation)
+      await this.update(this.$api.navigation)
     }
   }
 }

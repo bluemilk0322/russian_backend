@@ -4,7 +4,7 @@
     h4 影片列表
   .card-body
     ul.list-group
-      li.list-group-item(v-for="video in filterList")
+      li.list-group-item(v-for="video in filterList", :key="video.video_id")
         .top
           .title
             h4 {{ video.title }}
@@ -17,7 +17,6 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
-import { api } from '../../../api'
 import EditVideo from './EditVideo'
 
 export default {
@@ -25,23 +24,24 @@ export default {
     EditVideo
   },
   computed: {
-    ...mapState({
-      videos: state => state.video.data
+    ...mapState('video', {
+      videos: state => state.data
     }),
     filterList () {
       return this.videos
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    deleteVideo (video_id) {
-      const self = this
-      api.video.delete({ video_id }).then(response => {
-        self.initData()
-      })
+    ...mapActions('video', ['update']),
+    async deleteVideo (video_id) {
+      await this.$api.video.delete({ video_id })
+      await this.update(this.$api.video)
     }
+  },
+  mounted () {
+    this.$nextTick(async () => {
+      await this.update(this.$api.video)
+    })
   }
 }
 </script>

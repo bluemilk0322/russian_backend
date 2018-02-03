@@ -58,47 +58,42 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    save () {
+    ...mapActions('member', ['update']),
+    async save () {
       const self = this
-      return new Promise((resolve, reject) => {
-        if (self.preview.file !== null) {
-          self.getBase64(self.preview.file).then(data => {resolve(data)});
-        }
-        else resolve();
-      })
-      .then(data => {
-        if (data) self.editItem.image = {uri: data}
-        return api.member.edit(self.editItem)
-      })
-      .then(response => {
-        console.log(response)
-        self.initData()
-      })
-      .catch(err => {
-        console.error(err)
-      })
-    },
-    processFiles (event) {
-      const self = this
-      const file = event.target.files[0]
-      this.preview.file = file
-
-      const reader = new FileReader()
-      reader.onload = event => {
-        self.preview.image = event.target.result
+      if (await this.preview.file !== null) {
+        this.editItem.image = await this.getBase64(this.preview.file).then(data => data)
       }
-      reader.readAsDataURL(file)
+      await this.$api.member.edit(this.editItem)
+      await this.update(this.$api.member)
+      // return new Promise((resolve, reject) => {
+      //   if (self.preview.file !== null) {
+      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
+      //   }
+      //   else resolve();
+      // })
+      // .then(data => {
+      //   if (data) self.editItem.image = {uri: data}
+      //   return api.member.edit(self.editItem)
+      // })
+      // .then(response => {
+      //   console.log(response)
+      //   self.initData()
+      // })
+      // .catch(err => {
+      //   console.error(err)
+      // })
     },
-    getBase64 (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = error => reject(error)
-      })
+    async processFiles (event) {
+      const self = this
+      const file = await event.target.files[0]
+      this.preview.file = await file
+
+      const reader = await new FileReader()
+      reader.onload = async event => {
+        self.preview.image = await event.target.result
+      }
+      await reader.readAsDataURL(file)
     }
   }
 }

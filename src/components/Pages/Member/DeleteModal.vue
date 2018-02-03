@@ -13,7 +13,6 @@
         button.btn.btn-secondary(type='button', data-dismiss='modal') 取消
 </template>
 <script>
-import { api } from '../../../api'
 import { mapActions } from 'vuex'
 
 export default {
@@ -24,16 +23,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    deleteMember () {
-      const self = this
-      api.member.delete(this.memberItem.member_id).then(response => {
-        console.log(response)
-        self.initData()
-        $('#delete-member').modal('hide')
-      })
+    ...mapActions('member', ['update']),
+    async deleteMember () {
+      await this.$api.member.delete(this.memberItem.member_id)
+      await this.update(this.$api.member)
+      await $('#delete-member').modal('hide')
     }
   }
 }

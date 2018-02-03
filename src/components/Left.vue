@@ -4,6 +4,10 @@
       .photo.rounded-circle
       .name User
       .title Administrator
+    .lang
+      button(@click="switchLanguage(`tw`)") TW
+      button(@click="switchLanguage(`en`)") EN
+      button(@click="switchLanguage(`ru`)") RU
     nav.nav.flex-column
       router-link.nav-link(to="/navigation") Navigation 修改
       //- router-link.nav-link(to="/slider") Slider 修改
@@ -11,23 +15,40 @@
       router-link.nav-link(to="/banner") Banner 修改
       router-link.nav-link(to="/member") Member 修改
       router-link.nav-link(to="/content") Content 修改
-      router-link.nav-link(to="/admission") Admission 管理
+      router-link.nav-link(to="/user") User
       router-link.nav-link(to="/video") Video
       router-link.nav-link(to="/album") Album
       a.nav-link(href="", @click="logout") 登出
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
+  computed: {
+    ...mapState({
+      state: state => state
+    })
+  },
   methods: {
     ...mapActions({
-      logout: 'logoutAction',
-      initData: 'initData'
+      logout: 'logoutAction'
     })
   },
   beforeMount () {
     this.initData()
+  },
+  methods: {
+    async switchLanguage (language) {
+      await this.$api.switchLanguage(language)
+
+      const currentRoute = await this.$router.currentRoute.name
+      const routeAction = await currentRoute + '/update'
+      const routeApi = await this.$api[currentRoute]
+      await this.$store.dispatch(routeAction, routeApi)
+    },
+    async logout () {
+
+    }
   }
 }
 </script>
@@ -54,6 +75,12 @@ export default {
       text-align: center
     .title
       text-align: center
+  .lang
+    display: flex
+    button
+      flex-grow: 1
+      border: none
+      background: #777777
   .nav-link
     // text-decoration: none
     background: #eee

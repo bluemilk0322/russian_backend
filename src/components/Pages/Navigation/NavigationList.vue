@@ -1,7 +1,7 @@
 <template lang="pug">
 #navList
   ul.list-group
-    li.list-group-item(v-for="navigation in navigations")
+    li.list-group-item(v-for="navigation in navigations", :key="navigation.navigation_id")
       .top
         h4.title {{ navigation.name }}
         .actions
@@ -13,7 +13,6 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
-import { api } from '../../../api'
 import EditNavigation from './EditNavigation'
 
 export default {
@@ -21,25 +20,23 @@ export default {
     EditNavigation
   },
   computed: {
-    ...mapState({
-      navigations: state => state.navigation.data
+    ...mapState('navigation', {
+      navigations: state => state.data
     })
   },
-  data () {
-    return {
-
+  methods: {
+    ...mapActions('navigation', ['update']),
+    async deleteNavigation (navigation_id) {
+      await this.$api.navigation.delete({ navigation_id })
+      await this.update(this.$api.navigation)
     }
   },
-  methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    deleteNavigation (navigation_id) {
-      const self = this
-      api.navigation.delete({ navigation_id }).then(response => {
-        self.initData()
+  mounted () {
+    const self = this
+    this.$nextTick()
+      .then(async () => {
+        await this.update(this.$api.navigation)
       })
-    }
   }
 }
 </script>

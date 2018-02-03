@@ -14,11 +14,10 @@
         label 內容
         textarea#news-editor(name="news-editor")
       .form-group
-        button.btn.btn-primary(@click="add") 送出
+        button.btn.btn-primary(@click.prevent="add") 送出
 </template>
 <script>
-import { api } from '../../../api'
-import { mapActions } from "vuex";
+import { mapActions } from "vuex"
 
 export default {
   data () {
@@ -29,26 +28,23 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    add () {
-      const data = {
+    ...mapActions('news', ['update']),
+    async add () {
+      const data = await {
         title: this.title,
         type: this.type,
-        content: this.editorElement.getData()
+        content: await this.editorElement.getData()
       }
-      api.news.create(data).then(response => {
-        this.initData()
-      })
+      await this.$api.news.create(data)
+      await this.update(this.$api.news)
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      CKEDITOR.config.height = '1000px'
-      const editor = document.getElementById('news-editor')
-      this.editorElement = CKEDITOR.replace(editor, {
-        filebrowserUploadUrl: api.single_file_upload.link
+    this.$nextTick(async () => {
+      CKEDITOR.config.height = await '1000px'
+      const editor = await document.getElementById('news-editor')
+      this.editorElement = await CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: this.$api.singleFileUpload.fullLink
       })
     })
   }

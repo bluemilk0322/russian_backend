@@ -17,7 +17,6 @@
 </template>
 <script>
 import { mapActions } from "vuex"
-import { api } from '../../../api'
 
 export default {
   props: {
@@ -29,21 +28,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    save () {
-      const self = this
-      const data = {
+    ...mapActions('navigation', ['update']),
+    async save () {
+      const data = await {
         navigation_item_id: this.subItem.navigation_item_id,
         navigation_id: this.subItem.navigation_id,
         name: this.editSubItem.name,
         content_key: this.editSubItem.content_key,
         order: this.editSubItem.order
       }
-      api.navigationItem.edit(data).then(response => {
-        self.initData()
-      })
+      await this.$api.navigationItem.edit(data)
+      await this.update(this.$api.navigation)
     }
   }
 }

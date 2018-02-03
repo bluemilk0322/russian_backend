@@ -31,8 +31,8 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      contents: state => state.content
+    ...mapState('content', {
+      contents: state => state.data
     }),
     filterList () {
       return Object.keys(this.contents).filter(title => {
@@ -41,35 +41,37 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    editContent (contentTitle) {
-      this.currentTitle = contentTitle
-      const content = this.contents[contentTitle][0]
-      this.editorElement.setData(content)
+    ...mapActions('content', ['update']),
+    async editContent (contentTitle) {
+      this.currentTitle = await contentTitle
+      const content = await this.contents[contentTitle][0]
+      await this.editorElement.setData(content)
     },
-    saveContent () {
-      api.content.edit({title: this.currentTitle, content: this.editorElement.getData()})
-        .then(() => {
-          this.initData()
-        })
+    async saveContent () {
+      const data = {
+        title: await this.currentTitle,
+        content: await this.editorElement.getData()
+      }
+      await this.$api.content.edit(data)
     },
-    resetContent () {
-      const content = this.contents[this.currentTitle]
-      this.editorElement.setData(content)
+    async resetContent () {
+      const content = await this.contents[this.currentTitle]
+      await this.editorElement.setData(content)
     },
-    clearContent () {
-      this.editorElement.setData('')
+    async clearContent () {
+      await this.editorElement.setData('')
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      CKEDITOR.config.height = '1000px'
-      const editor = document.getElementById('content-editor')
-      this.editorElement = CKEDITOR.replace(editor, {
-        filebrowserUploadUrl: api.single_file_upload.link
+    this.$nextTick(async () => {
+      await this.update(this.$api.content)
+
+      CKEDITOR.config.height = await '1000px'
+      const editor = await document.getElementById('content-editor')
+      this.editorElement = await CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: await this.$api.singleFileUpload.fullLink
       })
+
       this.editorElement.on('fileUploadResponse', event => {
         // Prevent the default response handler.
         console.log(event)

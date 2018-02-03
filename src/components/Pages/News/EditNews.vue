@@ -14,10 +14,9 @@
       label content
       textarea(:id="`news-editor-` + news.news_id")
     .form-group
-      button.btn.btn-primary(@click="edit") 送出
+      button.btn.btn-primary(@click.prevent="edit") 送出
 </template>
 <script>
-import { api } from "../../../api"
 import { mapActions } from "vuex";
 
 export default {
@@ -30,31 +29,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    edit () {
-      const self = this
-      const data = {
+    ...mapActions('news', ['update']),
+    async edit () {
+      const data = await {
         news_id: this.news.news_id,
         title: this.editNews.title,
         type: this.editNews.type,
         content: this.editorElement.getData()
       }
-      api.news.edit(data).then(response => {
-        console.log(response)
-        self.initData()
-      })
+      await this.$api.news.edit(data)
+      await this.update(this.$api.news)
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      CKEDITOR.config.height = '1000px'
-      const editor = document.getElementById('news-editor-' + this.news.news_id)
-      this.editorElement = CKEDITOR.replace(editor, {
-        filebrowserUploadUrl: api.single_file_upload.link
+    this.$nextTick(async () => {
+      CKEDITOR.config.height = await '1000px'
+      const editor = await document.getElementById('news-editor-' + this.news.news_id)
+      this.editorElement = await CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: this.$api.singleFileUpload.fullLink
       })
-      this.editorElement.setData(this.news.content)
+      await this.editorElement.setData(this.news.content)
     })
   }
 }

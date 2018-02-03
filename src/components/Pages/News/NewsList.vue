@@ -5,7 +5,7 @@
     input.form-control(v-model="search", placeholder="請輸入關鍵字")
   .card-body
     ul.list-group
-      li.list-group-item(v-for="news in filterList")
+      li.list-group-item(v-for="(news, index) in filterList", :key="news.news_id")
         .top
           .title
             h4 {{ news.title }}
@@ -17,8 +17,7 @@
           EditNews(:news="news")
 </template>
 <script>
-import { api } from '../../../api'
-import { mapState } from "vuex"
+import { mapActions, mapState } from "vuex"
 import EditNews from './EditNews'
 
 export default {
@@ -31,25 +30,32 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      news: state => state.news
+    ...mapState('news', {
+      newsList: state => state.data
     }),
     filterList () {
-      const sortedList = this.news.slice().sort((news1, news2) => {
-        return new Date(news2.created_on) - new Date(news1.created_on)
-      })
-      return sortedList.filter(news => {
-        return news.title.includes(this.search)
-      })
+      if (this.newsList.length !== 0) {
+        const sortedList = this.newsList.slice().sort((news1, news2) => {
+          return new Date(news2.created_on) - new Date(news1.created_on)
+        })
+        return sortedList.filter(news => {
+          return news.title.includes(this.search)
+        })
+      }
     }
   },
   methods: {
-    deleteNews (news) {
-      const self = this
-      api.news.delete(news).then(response => {
-        self.initData()
-      })
+    ...mapActions('news', ['update']),
+    async deleteNews (news) {
+      await this.$api.news.delete(news)
+      await this.update(this.$api.news)
     }
+  },
+  mounted () {
+    this.$nextTick()
+      .then(async () => {
+        await this.update(this.$api.news)
+      })
   }
 }
 </script>

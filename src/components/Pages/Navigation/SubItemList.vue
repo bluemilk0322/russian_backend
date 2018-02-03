@@ -4,7 +4,7 @@
     h4 子選單列表
   .card-body
     ul.list-group
-      li.list-group-item.list-group-item-secondary(v-for="subItem in subItems")
+      li.list-group-item.list-group-item-secondary(v-for="subItem in subItems", :key="subItem.navigation_item_id")
         .top
           h4.title {{ subItem.name }}
           .actions
@@ -17,7 +17,6 @@
 </template>
 <script>
 import { mapActions } from "vuex"
-import { api } from '../../../api'
 import EditSubItem from './EditSubItem'
 
 export default {
@@ -28,14 +27,10 @@ export default {
     EditSubItem
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    deleteSubItem (navigation_item_id) {
-      const self = this
-      api.navigationItem.delete({ navigation_item_id }).then(resopnse => {
-        self.initData()
-      })
+    ...mapActions('navigation', ['update']),
+    async deleteSubItem (navigation_item_id) {
+      await this.$api.navigationItem.delete({ navigation_item_id })
+      await this.update(this.$api.navigation)
     }
   }
 }

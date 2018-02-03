@@ -3,7 +3,6 @@
   .card-header
     h1 Banner
   .card-body
-    //- p {{ banners }}
     .card.text-center
       .card-header
         label.btn.btn-info.form-control
@@ -33,44 +32,37 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      banners: state => state.banner
+    ...mapState('banner', {
+      banners: state => state.data
     })
   },
   methods: {
-    ...mapActions({
-      initData: 'initData'
-    }),
-    show () {
-      const viewer = this.$el.querySelector('.banner-images').$viewer
-      viewer.show()
+    ...mapActions('banner', ['update']),
+    async show () {
+      const viewer = await this.$el.querySelector('.banner-images').$viewer
+      await viewer.show()
     },
-    uploadPics () {
-      let self = this
-      api.banner.create(this.files).then(response => {
-        console.log(response)
-        self.initData()
-      })
+    async uploadPics () {
+      this.$api.banner.create(this.files)
+      this.update(this.$api.banner)
     },
-    processFiles (event) {
-      this.files = []
-      const files = event.target.files
+    async processFiles (event) {
+      this.files = await []
+      const files = await event.target.files
       for (let index = 0; index < files.length; index++) {
-        const file = files[index]
-        const filename = file.name
-        this.getBase64(file).then(data => {
-          this.files.push({name: filename, uri: data})
+        const file = await files[index]
+        const filename = await file.name
+        this.getBase64(file).then(async data => {
+          this.files.push({name: filename, uri: await data})
         })
       }
-    },
-    getBase64 (file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = error => reject(error)
-      })
     }
+  },
+  mounted () {
+    this.$nextTick()
+      .then(async () => {
+        await this.update(this.$api.banner)
+      })
   }
 }
 </script>

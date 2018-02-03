@@ -8,9 +8,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import VueViewer from 'v-viewer'
 import Mixin from './Mixin'
+import ApiPlugin from './api/ApiPlugin'
 
 Vue.use(VueViewer)
 Vue.mixin(Mixin)
+Vue.use(ApiPlugin)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
