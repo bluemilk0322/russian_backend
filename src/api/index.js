@@ -12,6 +12,7 @@ import News from './functions/News'
 import User from './functions/User'
 import Video from './functions/Video'
 import SingleFileUpload from './functions/SingleFileUpload'
+import TeachingExcellence from './functions/TeachingExcellence'
 
 class Api {
   constructor () {
@@ -107,6 +108,10 @@ class Api {
 
   get singleFileUpload () {
     return new SingleFileUpload(this.instance)
+  }
+
+  get teachingExcellence () {
+    return new TeachingExcellence(this.instance)
   }
 }
 

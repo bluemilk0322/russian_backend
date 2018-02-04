@@ -17,7 +17,6 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-// import { api } from '../../../api'
 
 export default {
   props: {

@@ -5,32 +5,8 @@ export const state = {
 }
 
 export const mutations = {
-  // [types.UPDATE_NAVIGATION_DATA] (state, data) {
-  //   state.navigation = data
-  // },
-  [types.UPDATE_SLIDER_DATA] (state, data) {
-    state.slider = data
-  },
-  [types.UPDATE_MEMBER_DATA] (state, data) {
-    state.member = data
-  },
-  [types.UPDATE_BANNER_DATA] (state, data) {
-    state.banner = data
-  },
-  [types.UPDATE_ADMISSION_DATA] (state, data) {
-    state.admission = data
-  },
-  [types.UPDATE_CONTENT_DATA] (state, data) {
-    state.content = data
-  },
   [types.UPDATE_LOGIN_STATUS] (state, loginStatus) {
     state.login = loginStatus
-  },
-  [types.UPDATE_VIDEO_DATA] (state, data) {
-    state.video = data
-  },
-  [types.UPDATE_ALBUM_DATA] (state, data) {
-    state.album = data
   },
   ['switchLang'] (state, lang) {
     state.lang = lang

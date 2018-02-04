@@ -10,6 +10,7 @@ import Admission from '../components/Pages/Admission/Admission.vue'
 import Video from '../components/Pages/Video/Video.vue'
 import Album from '../components/Pages/Album/Album.vue'
 import User from '../components/Pages/User/User.vue'
+import TeachingExcellence from '../components/Pages/TeachingExcellence/TeachingExcellence.vue'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: User
+    },
+    {
+      path: '/teachingExcellence',
+      name: 'teachingExcellence',
+      component: TeachingExcellence
     },
     {
       path: '/*',

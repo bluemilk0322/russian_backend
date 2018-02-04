@@ -41,7 +41,6 @@
         button.btn.btn-primary(@click="save") 儲存
 </template>
 <script>
-import { api } from '../../../api'
 import { mapActions } from 'vuex'
 
 export default {

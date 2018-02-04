@@ -1,7 +1,7 @@
 <template lang="pug">
 #albumList
   ul.list-group
-    li.list-group-item(v-for="album in albums")
+    li.list-group-item(v-for="album in albums", :key="album.album_id")
       .top
         h4.title {{ album.title }}
         .actions

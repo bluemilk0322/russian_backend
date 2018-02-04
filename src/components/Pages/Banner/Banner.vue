@@ -19,11 +19,10 @@
         h4 已上傳圖片
       .card-body
         .banner-images(v-viewer='{movable: false}')
-          img(v-for='src in banners', :src='`http://59.127.194.172:3030` + src.path', :key='src.banner_id', width="480", height="360")
+          img(v-for='src in banners', :src='$api.rootLink + src.path', :key='src.banner_id', width="480", height="360")
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
-import { api } from '../../../api'
 
 export default {
   data () {

@@ -18,6 +18,7 @@
       router-link.nav-link(to="/user") User
       router-link.nav-link(to="/video") Video
       router-link.nav-link(to="/album") Album
+      router-link.nav-link(to="/teachingExcellence") TeachingExcellence
       a.nav-link(href="", @click="logout") 登出
 </template>
 <script>
@@ -33,9 +34,6 @@ export default {
     ...mapActions({
       logout: 'logoutAction'
     })
-  },
-  beforeMount () {
-    this.initData()
   },
   methods: {
     async switchLanguage (language) {

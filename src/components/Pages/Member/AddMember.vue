@@ -41,7 +41,6 @@
         button.btn.btn-primary(@click="add") 送出
 </template>
 <script>
-import { api } from '../../../api'
 import { mapActions } from 'vuex'
 
 export default {

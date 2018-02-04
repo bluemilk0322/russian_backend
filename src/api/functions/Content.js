@@ -8,17 +8,17 @@ export default class {
     return await this.instance.get(this.link)
   }
 
-  async create ({ title = '', content = [] }) {
-    return await this.instance.post(this.link, { title, content })
+  async create ({ key, values }) {
+    return await this.instance.post(this.link, { key, values })
   }
 
-  async edit ({ content_id, title = '', content = [] }) {
-    const requestLink = this.link + content_id
-    return await this.instance.patch(requestLink, { title, content })
+  async edit ({ key, values }) {
+    const requestLink = this.link + key
+    return await this.instance.patch(this.link, { key, values })
   }
 
-  async delete ({ content_id }) {
-    const requestLink = this.link + content_id
+  async delete ({ key }) {
+    const requestLink = this.link + key
     return await this.instance.delete(requestLink)
   }
 }

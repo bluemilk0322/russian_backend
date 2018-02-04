@@ -5,6 +5,8 @@ import { getters } from './getters'
 import { actions } from './actions'
 import MyModule from './modules/myModule'
 import Login from './modules/Login'
+import Content from './modules/Content'
+import TeachingExcellence from './modules/TeachingExcellence'
 
 Vue.use(Vuex)
 
@@ -13,14 +15,15 @@ export default new Vuex.Store({
     admission: MyModule,
     album: MyModule,
     banner: MyModule,
-    content: MyModule,
+    content: Content,
     eventHighlight: MyModule,
     member: MyModule,
     navigation: MyModule,
     news: MyModule,
     user: MyModule,
     video: MyModule,
-    login: Login
+    login: Login,
+    teachingExcellence: TeachingExcellence
   },
   state,
   mutations,
