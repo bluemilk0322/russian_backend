@@ -39,11 +39,17 @@
         p(v-else) 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click.prevent="save") 儲存
+      .form-group(v-if="upload !== 'none'")
+        ProgressBar(:status="upload")
 </template>
 <script>
 import { mapActions } from 'vuex'
+import ProgressBar from '../ProgressBar'
 
 export default {
+  components: {
+    ProgressBar
+  },
   props: {
     memberItem: Object
   },
@@ -53,38 +59,24 @@ export default {
       preview: {
         file: null,
         image: null
-      }
+      },
+      upload: 'none'
     }
   },
   methods: {
     ...mapActions('member', ['update']),
     async save () {
-      const self = this
+      this.upload = await 'uploading'
       if (await this.preview.file !== null) {
         this.editItem.image = await this.getBase64(this.preview.file).then(data => data)
       }
       await this.$api.member.edit(this.editItem)
+      this.upload = await 'successed'
       await this.update(this.$api.member)
-      // return new Promise((resolve, reject) => {
-      //   if (self.preview.file !== null) {
-      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
-      //   }
-      //   else resolve();
-      // })
-      // .then(data => {
-      //   if (data) self.editItem.image = {uri: data}
-      //   return api.member.edit(self.editItem)
-      // })
-      // .then(response => {
-      //   console.log(response)
-      //   self.initData()
-      // })
-      // .catch(err => {
-      //   console.error(err)
-      // })
     },
     async processFiles (event) {
       const self = this
+      this.upload = await 'none'
       const file = await event.target.files[0]
       this.preview.file = await file
 

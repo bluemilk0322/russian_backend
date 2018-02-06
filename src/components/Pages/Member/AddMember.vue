@@ -39,11 +39,17 @@
           p 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click.prevent="add") 送出
+      .form-group(v-if="upload !== 'none'")
+        ProgressBar(:status="upload")
 </template>
 <script>
 import { mapActions } from 'vuex'
+import ProgressBar from '../ProgressBar'
 
 export default {
+  components: {
+    ProgressBar
+  },
   data () {
     return {
       newMember: {
@@ -58,47 +64,26 @@ export default {
       preview: {
         file: null,
         image: null
-      }
-    }
-  },
-  computed: {
-    isUploaded () {
-      // depreciated
-      return false
+      },
+      upload: 'none'
     }
   },
   methods: {
     ...mapActions('member', ['update']),
     async add () {
-      const self = this
+      this.upload = await 'uploading'
       if (await this.preview.file !== null) {
-        this.newMember.uri = await this.getBase64(this.preview.file).then(data => data)
+        this.newMember.uri = await this.getBase64(this.preview.file)
       }
       await this.$api.member.create(this.newMember)
+      this.upload = await 'successed'
       await this.update(this.$api.member)
-      // return new Promise((resolve, reject) => {
-      //   if (self.preview.file !== null) {
-      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
-      //   }
-      //   else resolve();
-      // })
-      // .then(data => {
-      //   if (data) self.newMember.uri = data
-      //   return api.member.create(self.newMember)
-      // })
-      // .then(response => {
-      //   console.log(response)
-      //   self.initData()
-      // })
-      // .catch(err => {
-      //   console.error(err)
-      // })
     },
     async processFiles (event) {
       const self = this
+      this.upload = await 'none'
       const file = await event.target.files[0]
       this.preview.file = await file
-
       const reader = await new FileReader()
       reader.onload = async event => {
         self.preview.image = await event.target.result

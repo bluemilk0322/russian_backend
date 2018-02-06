@@ -14,6 +14,7 @@
           .file(v-for="file in files") {{ file.name }}
       .card-footer
         button.form-control.btn.btn-primary(@click.prevent='uploadPics') 上傳
+        ProgressBar(v-if="upload !== 'none'", :status="upload")
     .card
       .card-header
         h4 已上傳圖片
@@ -23,11 +24,16 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import ProgressBar from '../ProgressBar.vue'
 
 export default {
+  components: {
+    ProgressBar
+  },
   data () {
     return {
-      files: []
+      files: [],
+      upload: 'none'
     }
   },
   computed: {
@@ -42,18 +48,20 @@ export default {
       await viewer.show()
     },
     async uploadPics () {
-      this.$api.banner.create(this.files)
-      this.update(this.$api.banner)
+      this.upload = await 'uploading'
+      await this.$api.banner.create(this.files)
+      this.upload = await 'successed'
+      await this.update(this.$api.banner)
     },
     async processFiles (event) {
+      this.upload = await 'none'
       this.files = await []
       const files = await event.target.files
       for (let index = 0; index < files.length; index++) {
         const file = await files[index]
-        const filename = await file.name
-        this.getBase64(file).then(async data => {
-          this.files.push({name: filename, uri: await data})
-        })
+        const name = await file.name
+        const uri = await this.getBase64(file)
+        this.files.push(await { name, uri })
       }
     }
   },

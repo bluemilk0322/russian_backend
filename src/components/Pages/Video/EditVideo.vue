@@ -59,23 +59,6 @@ export default {
       await this.$api.video.edit(this.editVideo)
       this.upload = await 'successed'
       await this.update(this.$api.video)
-      // const self = this
-      // return new Promise((resolve, reject) => {
-      //   if (self.preview.file !== null) {
-      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
-      //   }
-      //   else resolve();
-      // })
-      // .then(data => {
-      //   if (data) self.editVideo.image = {uri: data}
-      //   return api.video.edit(self.editVideo)
-      // })
-      // .then(response => {
-      //   self.initData()
-      // })
-      // .catch(err => {
-      //   console.error(err)
-      // })
     },
     async processFiles (event) {
       this.upload = await 'none'

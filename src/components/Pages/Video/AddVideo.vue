@@ -68,9 +68,6 @@ export default {
     },
     async processFiles (event) {
       this.upload = await 'none'
-      // this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
-      // this.upload.value = await 0
-      // this.upload.text = await ''
       const self = this
       const file = await event.target.files[0]
       this.preview.file = await file
