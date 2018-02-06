@@ -23,6 +23,9 @@
         p(v-else) 尚未上傳
       .form-group
         button.btn.btn-primary(@click.prevent="save") 儲存
+      .form-group(v-if="upload.isUploading")
+        .progress
+          .progress-bar(:class="upload.styleClass", role='progressbar', :style='`width: ` + upload.value + `%;`', :aria-valuenow='upload.value', aria-valuemin='0', aria-valuemax='100') {{ upload.text }}
 
 </template>
 <script>
@@ -38,16 +41,29 @@ export default {
       preview: {
         image: null,
         file: null
+      },
+      upload: {
+        isUploading: false,
+        styleClass: [],
+        value: 0,
+        text: ''
       }
     }
   },
   methods: {
     ...mapActions('video', ['update']),
     async save () {
+      this.upload.isUploading = await true
+      this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
+      this.upload.value = await 100
+      this.upload.text = await '上傳中'
       if (await this.preview.file !== null) {
         this.editVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
       }
       await this.$api.video.edit(this.editVideo)
+      this.upload.styleClass = await ['bg-success']
+      this.upload.value = await 100
+      this.upload.text = await '上傳完成'
       await this.update(this.$api.video)
       // const self = this
       // return new Promise((resolve, reject) => {
@@ -68,6 +84,7 @@ export default {
       // })
     },
     async processFiles (event) {
+      this.upload.isUploading = await false
       const self = this
       const file = await event.target.files[0]
       this.preview.file = await file

@@ -25,9 +25,9 @@
           p 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click.prevent="add") 送出
-      .form-group
+      .form-group(v-if="upload.isUploading")
         .progress
-          .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', style='width: 100%;', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100') 上傳中
+          .progress-bar(:class="upload.styleClass", role='progressbar', :style='`width: ` + upload.value + `%;`', :aria-valuenow='upload.value', aria-valuemin='0', aria-valuemax='100') {{ upload.text }}
 </template>
 <script>
 import { mapActions } from "vuex"
@@ -46,12 +46,22 @@ export default {
       preview: {
         image: null,
         file: null
+      },
+      upload: {
+        isUploading: false,
+        styleClass: [],
+        value: 0,
+        text: ''
       }
     }
   },
   methods: {
     ...mapActions('video', ['update']),
     async add () {
+      this.upload.isUploading = await true
+      this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
+      this.upload.value = await 100
+      this.upload.text = await '上傳中'
       // const self = this
       // return new Promise((resolve, reject) => {
       //   if (self.preview.file !== null) {
@@ -71,17 +81,20 @@ export default {
       // })
 
       if (await this.preview.file !== null) {
-        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => {
-          console.log(data)
-          return data
-        })}
+        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
       }
-      await this.$api.video.create(this.newVideo).then(response => {
-        console.log(response)
-      })
+      await this.$api.video.create(this.newVideo)
+      // this.upload.isUploading = await true
+      this.upload.styleClass = await ['bg-success']
+      this.upload.value = await 100
+      this.upload.text = await '上傳完成'
       await this.update(this.$api.video)
     },
     async processFiles (event) {
+      this.upload.isUploading = await false
+      // this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
+      // this.upload.value = await 0
+      // this.upload.text = await ''
       const self = this
       const file = await event.target.files[0]
       this.preview.file = await file
