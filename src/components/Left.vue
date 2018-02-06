@@ -9,16 +9,15 @@
       button(@click.prevent="switchLanguage(`en`)") EN
       button(@click.prevent="switchLanguage(`ru`)") RU
     nav.nav.flex-column
-      router-link.nav-link(to="/navigation") Navigation 修改
-      //- router-link.nav-link(to="/slider") Slider 修改
-      router-link.nav-link(to="/news") News 修改
-      router-link.nav-link(to="/banner") Banner 修改
-      router-link.nav-link(to="/member") Member 修改
-      router-link.nav-link(to="/content") Content 修改
-      router-link.nav-link(to="/user") User
-      router-link.nav-link(to="/video") Video
-      router-link.nav-link(to="/album") Album
-      router-link.nav-link(to="/teachingExcellence") TeachingExcellence
+      router-link.nav-link(to="/navigation") 導覽列
+      router-link.nav-link(to="/news") 最新消息
+      router-link.nav-link(to="/banner") 跑馬燈
+      router-link.nav-link(to="/member") 系所成員
+      router-link.nav-link(to="/content") 文章
+      router-link.nav-link(to="/video") 戲劇公演
+      router-link.nav-link(to="/album") 幕後花絮
+      router-link.nav-link(to="/teachingExcellence") 教卓計畫
+      router-link.nav-link(to="/user") 帳號管理
       a.nav-link(href="", @click.prevent="logout") 登出
 </template>
 <script>
