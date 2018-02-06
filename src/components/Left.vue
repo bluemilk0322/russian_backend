@@ -18,7 +18,7 @@
       router-link.nav-link(to="/album") 活動花絮
       router-link.nav-link(to="/teachingExcellence") 教卓計畫
       router-link.nav-link(to="/user") 帳號管理
-      a.nav-link(href="", @click.prevent="logout") 登出
+      a.nav-link(href="", @click.prevent="logoutAction") 登出
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
@@ -30,11 +30,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      logout: 'logoutAction'
-    })
-  },
-  methods: {
+    ...mapActions('login', ['logoutAction']),
     async switchLanguage (language) {
       await this.$api.switchLanguage(language)
 
@@ -42,9 +38,6 @@ export default {
       const routeAction = await currentRoute + '/update'
       const routeApi = await this.$api[currentRoute]
       await this.$store.dispatch(routeAction, routeApi)
-    },
-    async logout () {
-
     }
   }
 }

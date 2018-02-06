@@ -1,9 +1,9 @@
 <template lang="pug">
   #app
-    .logined(v-if="logined === 'logined'")
+    .logined(v-if="loginStatus")
       Left
       Right
-    .not-login(v-if="logined !== 'logined'")
+    .not-login(v-if="!loginStatus")
       Login
 
 </template>
@@ -22,20 +22,17 @@ export default {
     Login
   },
   computed: {
-    ...mapState({
-      logined: state => state.login.session
+    ...mapState('login', {
+      loginStatus: state => state.loginStatus
     })
   },
   methods: {
-    ...mapActions({
-      initData: 'initData',
-      loadStatus: 'loadStatus'
-    })
+    ...mapActions('login', ['getStatus'])
   },
   mounted () {
     // let self = this.logined
     this.$nextTick(() => {
-      this.loadStatus()
+      this.getStatus()
     })
   }
 }
@@ -48,6 +45,11 @@ export default {
   .logined
     display: flex
   .not-login
+    height: 100%
+    display: flex
+    // flex-direction: row
+    justify-content: center
+    align-items: center
 
 
 // GLOBALS
