@@ -12,7 +12,7 @@
         //- label images
         //- ImageList(:images="editAlbum.images", :album_id="editAlbum.album_id", @addImage="addImage", @deleteImage="deleteImage")
       .form-group
-        button.btn.btn-primary(@click="save") save
+        button.btn.btn-primary(@click.prevent="save") save
 </template>
 <script>
 import { mapActions } from "vuex"

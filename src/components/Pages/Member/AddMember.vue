@@ -38,7 +38,7 @@
         .none(v-else)
           p 尚未上傳圖片
       .form-group
-        button.btn.btn-primary(@click="add") 送出
+        button.btn.btn-primary(@click.prevent="add") 送出
 </template>
 <script>
 import { mapActions } from 'vuex'

@@ -13,7 +13,7 @@
         .pics(v-else)
           .file(v-for="file in files") {{ file.name }}
       .card-footer
-        button.form-control.btn.btn-primary(@click='uploadPics') 上傳
+        button.form-control.btn.btn-primary(@click.prevent='uploadPics') 上傳
     .card
       .card-header
         h4 已上傳圖片

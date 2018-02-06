@@ -7,7 +7,7 @@
   .card-body
     .pic(v-for="(imageData, index) in editImages")
       img(:src="parsePath(imageData)", width="300px")
-      button.btn.btn-danger(@click="deleteImage(imageData, index)") delete
+      button.btn.btn-danger(@click.prevent="deleteImage(imageData, index)") delete
 </template>
 <script>
 export default {

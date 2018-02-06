@@ -9,7 +9,7 @@
       .modal-body
         p 確定刪除 #[strong {{ memberItem.name }}] ?
       .modal-footer
-        button.btn.btn-primary(type='button', @click="deleteMember") 確定
+        button.btn.btn-primary(type='button', @click.prevent="deleteMember") 確定
         button.btn.btn-secondary(type='button', data-dismiss='modal') 取消
 </template>
 <script>

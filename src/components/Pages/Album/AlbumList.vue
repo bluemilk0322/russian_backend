@@ -7,7 +7,7 @@
         .actions
           .btn-group(role='group', aria-label='actions')
             button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#` + album.title') 編輯
-            button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-album", @click="deleteAlbum(album.album_id)") 刪除
+            button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-album", @click.prevent="deleteAlbum(album.album_id)") 刪除
       .bottom.collapse(:id="album.title")
         EditAlbum(:album="album")
 </template>

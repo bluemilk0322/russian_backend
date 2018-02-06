@@ -13,7 +13,7 @@
       label order
       input.form-control(v-model.number="order", type='number', placeholder="order", min=0)
     .form-group
-      button.btn.btn-primary(@click="add", type='button') 新增
+      button.btn.btn-primary(@click.prevent="add", type='button') 新增
 </template>
 <script>
 import { mapActions } from 'vuex'

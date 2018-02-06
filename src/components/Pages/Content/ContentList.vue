@@ -8,7 +8,7 @@
       li.list-group-item(v-for="contentItem in filterList", :key="contentItem.title")
         h5 {{ contentItem.title }}
         .btn-group
-          button.btn.btn-primary(@click="edit(contentItem)") 編輯
+          button.btn.btn-primary(@click.prevent="edit(contentItem)") 編輯
           //- button.btn.btn-danger(@click="deleteContent(contentItem)") 刪除
 </template>
 <script>

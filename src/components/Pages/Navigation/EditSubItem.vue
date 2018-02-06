@@ -12,7 +12,7 @@
         label order
         input.form-control(type='number', v-model.number="editSubItem.order", min=0)
       .form-group
-        button.btn.btn-primary(@click="save", type='button') 修改
+        button.btn.btn-primary(@click.prevent="save", type='button') 修改
 
 </template>
 <script>

@@ -9,7 +9,7 @@
         label order
         input.form-control(type='number', v-model.number="editNavigation.order", min=0)
       .form-group
-        button.btn.btn-primary(type='button', @click="editNavigationName(editNavigation)") 修改
+        button.btn.btn-primary(type='button', @click.prevent="editNavigationName(editNavigation)") 修改
       .form-group
         AddSubItem(:navigationId="navigation.navigation_id")
         SubItemList(:subItems="navigation.subItems")

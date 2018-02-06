@@ -9,9 +9,9 @@
       .form-group
         textarea#editContentEditor Please choose content
       .form-group.actions
-        button.btn.btn-primary(@click="saveContent") 儲存
-        button.btn.btn-success(@click="resetContent") 重置
-        button.btn.btn-danger(@click="clearContent") 清除
+        button.btn.btn-primary(@click.prevent="saveContent") 儲存
+        button.btn.btn-success(@click.prevent="resetContent") 重置
+        button.btn.btn-danger(@click.prevent="clearContent") 清除
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'

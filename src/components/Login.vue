@@ -8,7 +8,7 @@
   .form-group
     label 密碼
     input.form-control(type='password', placeholder='請輸入密碼', v-model="password")
-  button.btn.btn-primary(@click="login") 登入
+  button.btn.btn-primary(@click.prevent="login") 登入
 </template>
 <script>
 import { mapActions } from 'vuex'

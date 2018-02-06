@@ -24,7 +24,10 @@
         .none(v-else)
           p 尚未上傳圖片
       .form-group
-        button.btn.btn-primary(@click="add") 送出
+        button.btn.btn-primary(@click.prevent="add") 送出
+      .form-group
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', style='width: 100%;', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100') 上傳中
 </template>
 <script>
 import { mapActions } from "vuex"
@@ -68,9 +71,14 @@ export default {
       // })
 
       if (await this.preview.file !== null) {
-        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
+        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => {
+          console.log(data)
+          return data
+        })}
       }
-      await this.$api.video.create(this.newVideo)
+      await this.$api.video.create(this.newVideo).then(response => {
+        console.log(response)
+      })
       await this.update(this.$api.video)
     },
     async processFiles (event) {

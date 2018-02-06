@@ -5,9 +5,9 @@
       .name User
       .title Administrator
     .lang
-      button(@click="switchLanguage(`tw`)") TW
-      button(@click="switchLanguage(`en`)") EN
-      button(@click="switchLanguage(`ru`)") RU
+      button(@click.prevent="switchLanguage(`tw`)") TW
+      button(@click.prevent="switchLanguage(`en`)") EN
+      button(@click.prevent="switchLanguage(`ru`)") RU
     nav.nav.flex-column
       router-link.nav-link(to="/navigation") Navigation 修改
       //- router-link.nav-link(to="/slider") Slider 修改
@@ -19,7 +19,7 @@
       router-link.nav-link(to="/video") Video
       router-link.nav-link(to="/album") Album
       router-link.nav-link(to="/teachingExcellence") TeachingExcellence
-      a.nav-link(href="", @click="logout") 登出
+      a.nav-link(href="", @click.prevent="logout") 登出
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'

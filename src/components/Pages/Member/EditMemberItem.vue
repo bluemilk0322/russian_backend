@@ -38,7 +38,7 @@
         img(:src="preview.image", v-if="preview.image !== null")
         p(v-else) 尚未上傳圖片
       .form-group
-        button.btn.btn-primary(@click="save") 儲存
+        button.btn.btn-primary(@click.prevent="save") 儲存
 </template>
 <script>
 import { mapActions } from 'vuex'

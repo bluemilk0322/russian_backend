@@ -12,7 +12,7 @@
           .actions
             .btn-group(role='group', aria-label='actions')
               button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#member` + member.member_id') 編輯
-              button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-member", @click="deleteProp(member)") 刪除
+              button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-member", @click.prevent="deleteProp(member)") 刪除
         .bottom.collapse(:id="`member` + member.member_id")
           EditMember(:memberItem="member")
 </template>

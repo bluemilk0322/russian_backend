@@ -21,7 +21,7 @@
       //-       img(:src="pic", width="300px")
       //-       button.btn.btn-danger(@click="deletePic(index)") delete
       .form-group
-        button.btn.btn-primary(@click="create") send
+        button.btn.btn-primary(@click.prevent="create") send
 </template>
 <script>
 import { mapActions } from 'vuex'

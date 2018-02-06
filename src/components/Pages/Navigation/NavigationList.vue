@@ -7,7 +7,7 @@
         .actions
           .btn-group(role='group', aria-label='actions')
             button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#` + navigation.name') 編輯
-            button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-nav", @click="deleteNavigation(navigation.navigation_id)") 刪除
+            button.btn.btn-danger(type='button', data-toggle="modal" data-target="#delete-nav", @click.prevent="deleteNavigation(navigation.navigation_id)") 刪除
       .bottom.collapse(:id="navigation.name")
         EditNavigation(:navigation="navigation")
 </template>

@@ -22,7 +22,7 @@
         img(v-if="preview.file !== null", :src="preview.image")
         p(v-else) 尚未上傳
       .form-group
-        button.btn.btn-primary(@click="save") 儲存
+        button.btn.btn-primary(@click.prevent="save") 儲存
 
 </template>
 <script>

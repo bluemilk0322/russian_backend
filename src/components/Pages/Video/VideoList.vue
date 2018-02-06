@@ -11,7 +11,7 @@
           .action
             .btn-group(role='group', aria-label='actions')
               button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#video` + video.video_id') 編輯
-              button.btn.btn-danger(type='button', @click="deleteVideo(video.video_id)") 刪除
+              button.btn.btn-danger(type='button', @click.prevent="deleteVideo(video.video_id)") 刪除
         .bottom.collapse(:id="`video` + video.video_id")
           EditVideo(:video="video")
 </template>

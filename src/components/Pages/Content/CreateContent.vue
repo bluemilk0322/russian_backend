@@ -10,7 +10,7 @@
         label content
         textarea#createContentEditor Please enter content
       .form-group
-        button.btn.btn-primary(@click="create") Submit
+        button.btn.btn-primary(@click.prevent="create") Submit
 </template>
 <script>
 import { mapActions } from 'vuex'

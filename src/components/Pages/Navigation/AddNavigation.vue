@@ -11,7 +11,7 @@
         label order
         input.form-control(v-model.number="order", type='number', placeholder="order", aria-label="order", aria-describedby='basic-addon2', min=0)
       .form-group
-        button.btn.btn-outline-success(type='button', @click="add") 新增
+        button.btn.btn-outline-success(type='button', @click.prevent="add") 新增
 </template>
 <script>
 import { mapActions } from 'vuex'

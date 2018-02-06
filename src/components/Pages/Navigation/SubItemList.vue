@@ -10,7 +10,7 @@
           .actions
             .btn-group(role='group', aria-label='actions')
               button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#subItem-` + subItem.navigation_item_id') 編輯
-              button.btn.btn-danger(@click="deleteSubItem(subItem.navigation_item_id)", type='button') 刪除
+              button.btn.btn-danger(@click.prevent="deleteSubItem(subItem.navigation_item_id)", type='button') 刪除
         .bottom.collapse(:id="`subItem-` + subItem.navigation_item_id")
           EditSubItem(:subItem="subItem")
 

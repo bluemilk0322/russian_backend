@@ -12,7 +12,7 @@
           .action
             .btn-group(role='group', aria-label='actions')
               button.btn.btn-primary(type='button', data-toggle='collapse', :data-target='`#news` + news.news_id') 編輯
-              button.btn.btn-danger(type='button', @click="deleteNews(news)") 刪除
+              button.btn.btn-danger(type='button', @click.prevent="deleteNews(news)") 刪除
         .bottom.collapse(:id="`news` + news.news_id")
           EditNews(:news="news")
 </template>
