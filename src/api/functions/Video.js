@@ -13,7 +13,7 @@ export default class {
   }
 
   async edit ({ video_id, title, content, image, link }) {
-    const requestLink = this.link + ''
+    const requestLink = this.link + video_id
     return await this.instance.patch(requestLink, { title, content, image, link })
   }
 

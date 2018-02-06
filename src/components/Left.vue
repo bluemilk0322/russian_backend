@@ -15,7 +15,7 @@
       router-link.nav-link(to="/member") 系所成員
       router-link.nav-link(to="/content") 文章
       router-link.nav-link(to="/video") 戲劇公演
-      router-link.nav-link(to="/album") 幕後花絮
+      router-link.nav-link(to="/album") 活動花絮
       router-link.nav-link(to="/teachingExcellence") 教卓計畫
       router-link.nav-link(to="/user") 帳號管理
       a.nav-link(href="", @click.prevent="logout") 登出

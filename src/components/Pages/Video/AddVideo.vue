@@ -25,14 +25,17 @@
           p 尚未上傳圖片
       .form-group
         button.btn.btn-primary(@click.prevent="add") 送出
-      .form-group(v-if="upload.isUploading")
-        .progress
-          .progress-bar(:class="upload.styleClass", role='progressbar', :style='`width: ` + upload.value + `%;`', :aria-valuenow='upload.value', aria-valuemin='0', aria-valuemax='100') {{ upload.text }}
+      .form-group(v-if="upload !== 'none'")
+        ProgressBar(:status="upload")
 </template>
 <script>
 import { mapActions } from "vuex"
+import ProgressBar from '../ProgressBar.vue'
 
 export default {
+  components: {
+    ProgressBar
+  },
   data () {
     return {
       newVideo: {
@@ -47,51 +50,24 @@ export default {
         image: null,
         file: null
       },
-      upload: {
-        isUploading: false,
-        styleClass: [],
-        value: 0,
-        text: ''
-      }
+      upload: 'none'
     }
   },
   methods: {
     ...mapActions('video', ['update']),
     async add () {
-      this.upload.isUploading = await true
-      this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
-      this.upload.value = await 100
-      this.upload.text = await '上傳中'
-      // const self = this
-      // return new Promise((resolve, reject) => {
-      //   if (self.preview.file !== null) {
-      //     self.getBase64(self.preview.file).then(data => {resolve(data)});
-      //   }
-      //   else resolve();
-      // })
-      // .then(data => {
-      //   if (data) self.newVideo.image = {uri: data}
-      //   return api.video.create(self.newVideo)
-      // })
-      // .then(response => {
-      //   self.initData()
-      // })
-      // .catch(err => {
-      //   console.error(err)
-      // })
+      this.upload = await 'uploading'
 
       if (await this.preview.file !== null) {
-        this.newVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
+        const uri = await this.getBase64(this.preview.file)
+        this.newVideo.image = { uri }
       }
       await this.$api.video.create(this.newVideo)
-      // this.upload.isUploading = await true
-      this.upload.styleClass = await ['bg-success']
-      this.upload.value = await 100
-      this.upload.text = await '上傳完成'
+      this.upload = await 'successed'
       await this.update(this.$api.video)
     },
     async processFiles (event) {
-      this.upload.isUploading = await false
+      this.upload = await 'none'
       // this.upload.styleClass = await ['progress-bar-striped', 'progress-bar-animated']
       // this.upload.value = await 0
       // this.upload.text = await ''

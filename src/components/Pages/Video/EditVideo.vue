@@ -13,7 +13,7 @@
         input.form-control(v-model="editVideo.link")
       .form-group
         label current image
-        img(:src="$api.rootLink + editVideo.image.path")
+        img(:src="$api.rootLink + video.image.path")
       .form-group
         label.btn.btn-info.form-control
           input(style='display:none;', type='file', @change="processFiles($event)")
@@ -58,7 +58,8 @@ export default {
       this.upload.value = await 100
       this.upload.text = await '上傳中'
       if (await this.preview.file !== null) {
-        this.editVideo.image = {uri: await this.getBase64(this.preview.file).then(data => data)}
+        const uri = await this.getBase64(this.preview.file)
+        this.editVideo.image = { uri }
       }
       await this.$api.video.edit(this.editVideo)
       this.upload.styleClass = await ['bg-success']
