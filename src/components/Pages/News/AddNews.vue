@@ -9,7 +9,12 @@
         input.form-control(v-model="title")
       .form-group
         label 類型
-        input.form-control(v-model="type")
+        select.form-control(type='text', v-model="type")
+          option(value="school") 校內公告
+          option(value="speech") 活動演講
+          option(value="recruitment") 企業徵才
+          option(value="scholarship") 獎助學金
+          option(value="others") 其他訊息
       .form-group
         label 內容
         textarea#news-editor(name="news-editor")
@@ -24,7 +29,7 @@ export default {
     return {
       title: null,
       content: null,
-      type: null
+      type: 'school'
     }
   },
   methods: {

@@ -9,7 +9,12 @@
       input.form-control(v-model="editNews.created_on", disabled=true)
     .form-group
       label type
-      input.form-control(v-model="editNews.type")
+      select.form-control(type='text', v-model="editNews.type")
+          option(value="school") 校內公告
+          option(value="speech") 活動演講
+          option(value="recruitment") 企業徵才
+          option(value="scholarship") 獎助學金
+          option(value="others") 其他訊息
     .form-group
       label content
       textarea(:id="`news-editor-` + news.news_id")
