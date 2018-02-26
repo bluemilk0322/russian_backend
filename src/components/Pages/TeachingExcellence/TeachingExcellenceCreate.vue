@@ -1,21 +1,21 @@
 <template lang="pug">
 #teachingExcellenceCreate.card
   .card-header
-    h3 Teaching Excellence Create
+    h3 創建
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="title", type="text", placeholder="Please enter title")
       .form-group
-        label year
+        label 民國年
         input.form-control(v-model="year", type="number", min=90, placeholder="Please enter year")
       .form-group
-        label content
+        label 文章
         textarea#teachingExcellenceCreateEditor
           p Please enter content
       .form-group
-        button.btn.btn-primary(@click.prevent="create") Submit
+        button.btn.btn-primary(@click.prevent="create") 儲存
 </template>
 <script>
 import { mapActions } from 'vuex'

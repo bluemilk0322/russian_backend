@@ -1,21 +1,21 @@
 <template lang="pug">
 #teachingExcellenceEdit.card
   .card-header
-    h3 Teaching Excellence Edit
+    h3 編輯
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="edit.title", type="text", placeholder="Please choose item")
       .form-group
-        label year
+        label 民國年
         input.form-control(v-model="edit.year", type="number", min=90, placeholder="Please choose item")
       .form-group
-        label content
+        label 文章
         textarea#teachingExcellenceEditEditor
           p Please choose item
       .form-group
-        button.btn.btn-primary(@click="save") Save
+        button.btn.btn-primary(@click="save") 儲存
 </template>
 <script>
 import { mapState } from 'vuex'

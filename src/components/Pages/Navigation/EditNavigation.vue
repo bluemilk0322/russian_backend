@@ -3,10 +3,10 @@
   .card-body
     form
       .form-group
-        label name
+        label 標題
         input.form-control(type='text', v-model="editNavigation.name")
       .form-group
-        label order
+        label 順序
         input.form-control(type='number', v-model.number="editNavigation.order", min=0)
       .form-group
         button.btn.btn-primary(type='button', @click.prevent="editNavigationName(editNavigation)") 修改

@@ -1,7 +1,7 @@
 <template lang="pug">
 #Content.card
   .card-header
-    h1 Content
+    h1 文章
   .card-body
     CreateContent
     ContentList

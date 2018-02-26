@@ -1,16 +1,16 @@
 <template lang="pug">
 #createContent.card
-  .card-header #[h3 Create Content]
+  .card-header #[h3 創建文章]
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model='title', type='text', placeholder="Please enter title")
       .form-group
-        label content
+        label 文章
         textarea#createContentEditor Please enter content
       .form-group
-        button.btn.btn-primary(@click.prevent="create") Submit
+        button.btn.btn-primary(@click.prevent="create") 確認
 </template>
 <script>
 import { mapActions } from 'vuex'

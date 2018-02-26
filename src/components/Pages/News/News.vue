@@ -1,7 +1,7 @@
 <template lang="pug">
 #news.card
   .card-header
-    h1 News
+    h1 最新消息
   .card-body
     AddNews
     NewsList

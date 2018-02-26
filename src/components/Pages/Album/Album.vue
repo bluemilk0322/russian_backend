@@ -1,7 +1,7 @@
 <template lang="pug">
 #album.card
   .card-header
-    h1 Album
+    h1 活動花絮
   .card-body
     AddAlbum
     AlbumList

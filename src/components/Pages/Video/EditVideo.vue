@@ -3,13 +3,13 @@
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="editVideo.title")
       .form-group
-        label content
+        label 文件
         input.form-control(v-model="editVideo.content")
       .form-group
-        label link
+        label 連結
         input.form-control(v-model="editVideo.link")
       .form-group
         label current image

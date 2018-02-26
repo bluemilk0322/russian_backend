@@ -1,7 +1,7 @@
 <template lang="pug">
 #contentList.search.card
   .card-header
-    h4 Content List
+    h4 文章列表
     input.form-control(v-model='search', type='text', placeholder="請輸入標題", aria-label="請輸入標題", aria-describedby='basic-addon2')
   .card-body
     ul.list-group

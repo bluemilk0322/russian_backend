@@ -1,6 +1,6 @@
 <template lang="pug">
 #teachingExcellence.card
-  .card-header #[h1 Teaching Excellence]
+  .card-header #[h1 教卓計畫]
   .card-body
     TeachingExcellenceCreate
     TeachingExcellenceList

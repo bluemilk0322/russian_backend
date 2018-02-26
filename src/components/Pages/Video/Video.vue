@@ -1,7 +1,7 @@
 <template lang="pug">
 #video.card
   .card-header
-    h1 Video
+    h1 戲劇公演
   .card-body
     AddVideo
     VideoList

@@ -1,7 +1,7 @@
 <template lang="pug">
 #Nav.card
   .card-header
-    h1 Navigation
+    h1 導覽列
   .card-body
     AddNavigation
     NavigationList

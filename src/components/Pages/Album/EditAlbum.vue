@@ -3,16 +3,16 @@
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="editAlbum.title")
       .form-group
-        label content
+        label 文章
         textarea(:id="`album` + album.album_id")
       //- .form-group
         //- label images
         //- ImageList(:images="editAlbum.images", :album_id="editAlbum.album_id", @addImage="addImage", @deleteImage="deleteImage")
       .form-group
-        button.btn.btn-primary(@click.prevent="save") save
+        button.btn.btn-primary(@click.prevent="save") 儲存
 </template>
 <script>
 import { mapActions } from "vuex"

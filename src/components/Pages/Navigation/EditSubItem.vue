@@ -3,13 +3,13 @@
   .card-body
     form
       .form-group
-        label name
+        label 標題
         input.form-control(type='text', v-model="editSubItem.name")
       .form-group
         label contentKey
         input.form-control(type='text', v-model="editSubItem.content_key")
       .form-group
-        label order
+        label 順序
         input.form-control(type='number', v-model.number="editSubItem.order", min=0)
       .form-group
         button.btn.btn-primary(@click.prevent="save", type='button') 修改

@@ -1,7 +1,7 @@
 <template lang="pug">
 #Member.card
   .card-header
-    h1 Member
+    h1 師資
   .card-body
     AddMember
     MemberList

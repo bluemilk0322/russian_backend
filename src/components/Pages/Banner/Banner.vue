@@ -1,7 +1,7 @@
 <template lang="pug">
 #Carousel.card
   .card-header
-    h1 Banner
+    h1 跑馬燈
   .card-body
     .card.text-center
       .card-header

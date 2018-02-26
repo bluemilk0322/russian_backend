@@ -5,10 +5,10 @@
   .card-body
     form
       .form-group
-        label name
+        label 標題
         input.form-control(v-model="name", type='text', placeholder="請輸入標題", aria-label="請輸入標題", aria-describedby='basic-addon2')
       .form-group
-        label order
+        label 順序
         input.form-control(v-model.number="order", type='number', placeholder="order", aria-label="order", aria-describedby='basic-addon2', min=0)
       .form-group
         button.btn.btn-outline-success(type='button', @click.prevent="add") 新增

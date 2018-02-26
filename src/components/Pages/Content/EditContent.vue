@@ -1,10 +1,10 @@
 <template lang="pug">
 #editContent.card
-  .card-header #[h3 Edit Content]
+  .card-header #[h3 編輯文章]
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="title", placeholder="Please choose content")
       .form-group
         textarea#editContentEditor Please choose content

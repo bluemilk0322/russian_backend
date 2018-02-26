@@ -10,7 +10,7 @@
       label 欲連結之文章
       input.form-control(v-model="contentKey", type='text', placeholder="請輸入欲連結文章名")
     .form-group
-      label order
+      label 順序
       input.form-control(v-model.number="order", type='number', placeholder="order", min=0)
     .form-group
       button.btn.btn-primary(@click.prevent="add", type='button') 新增

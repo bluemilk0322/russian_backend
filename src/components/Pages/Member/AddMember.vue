@@ -5,23 +5,23 @@
   .card-body
     form
       .form-group
-        label name
+        label 姓名
         input.form-control(type='text', v-model="newMember.name")
       .form-group
-        label position
+        label 職位
         input.form-control(type='text', v-model="newMember.position")
       .form-group
-        label teaching_lessons
+        label 工作內容
         textarea#createMemberTeachingLessons
         //- input.form-control(type='text', v-model="newMember.teaching_lessons")
       .form-group
         label email
         input.form-control(type='text', v-model="newMember.email")
       .form-group
-        label telephone
+        label 聯絡電話
         input.form-control(type='text', v-model="newMember.telephone")
       .form-group
-        label type
+        label 分類
         select.form-control(type='text', v-model="newMember.type")
           option(value="Fulltime") Fulltime
           option(value="Parttime") Parttime

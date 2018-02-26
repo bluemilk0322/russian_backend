@@ -5,13 +5,13 @@
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="newVideo.title")
       .form-group
-        label content
+        label 文章
         input.form-control(v-model="newVideo.content")
       .form-group
-        label video link
+        label 影片連結
         input.form-control(v-model="newVideo.link")
       .form-group
         label image

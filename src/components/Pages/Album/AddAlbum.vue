@@ -1,14 +1,14 @@
 <template lang="pug">
 #addAlbum.card
   .card-header
-    h4 Create Album
+    h4 創建
   .card-body
     form
       .form-group
-        label title
+        label 標題
         input.form-control(v-model="title")
       .form-group
-        label content
+        label 文章
         //- input.form-control(v-model="newAlbum.content")
         textarea#createAlbumEditor
       //- .form-group.card
@@ -21,7 +21,7 @@
       //-       img(:src="pic", width="300px")
       //-       button.btn.btn-danger(@click="deletePic(index)") delete
       .form-group
-        button.btn.btn-primary(@click.prevent="create") send
+        button.btn.btn-primary(@click.prevent="create") 儲存
 </template>
 <script>
 import { mapActions } from 'vuex'

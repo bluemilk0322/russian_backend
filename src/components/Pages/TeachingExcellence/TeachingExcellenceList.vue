@@ -1,7 +1,7 @@
 <template lang="pug">
 #teachingExcellenceList.card
   .card-header
-    h3 Teaching Excellence List
+    h3 列表
   .card-body
     ul.list-group
       li.list-group-item.year(v-for="year in yearList", :key="year")
