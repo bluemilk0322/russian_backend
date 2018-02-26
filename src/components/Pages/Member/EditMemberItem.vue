@@ -10,7 +10,8 @@
         input.form-control(type='text', v-model="editItem.position")
       .form-group
         label teaching_lessons
-        input.form-control(type='text', v-model="editItem.teaching_lessons")
+        textarea(:id="editorId")
+        //- input.form-control(type='text', v-model="editItem.teaching_lessons")
       .form-group
         label email
         input.form-control(type='text', v-model="editItem.email")
@@ -27,7 +28,7 @@
           option(value="Tutor") Tutor
       .form-group
         label original image
-        img(:src="'http://59.127.194.172:3030' + editItem.image.path", v-if="editItem.image.path !== ''")
+        img(:src="$api.rootLink + editItem.image.path", v-if="editItem.image.path !== ''")
         p(v-else) 無圖片
       .form-group
         label edit image
@@ -60,7 +61,8 @@ export default {
         file: null,
         image: null
       },
-      upload: 'none'
+      upload: 'none',
+      editorId: `editMemberTeachingeLessons` + this.memberItem.member_id
     }
   },
   methods: {
@@ -70,6 +72,7 @@ export default {
       if (await this.preview.file !== null) {
         this.editItem.image = await this.getBase64(this.preview.file).then(data => data)
       }
+      this.editItem.teaching_lessons = await this.editorElement.getData()
       await this.$api.member.edit(this.editItem)
       this.upload = await 'successed'
       await this.update(this.$api.member)
@@ -86,6 +89,16 @@ export default {
       }
       await reader.readAsDataURL(file)
     }
+  },
+  mounted() {
+    this.$nextTick(async () => {
+      const editor = await document.getElementById(this.editorId)
+      this.editorElement = await CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: await this.$api.singleFileUpload.fullLink,
+        height: await 50
+      })
+      this.editorElement.setData(this.memberItem.teaching_lessons)
+    })
   }
 }
 </script>

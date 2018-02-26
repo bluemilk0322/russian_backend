@@ -12,7 +12,8 @@
         input.form-control(type='text', v-model="newMember.position")
       .form-group
         label teaching_lessons
-        input.form-control(type='text', v-model="newMember.teaching_lessons")
+        textarea#createMemberTeachingLessons
+        //- input.form-control(type='text', v-model="newMember.teaching_lessons")
       .form-group
         label email
         input.form-control(type='text', v-model="newMember.email")
@@ -75,6 +76,7 @@ export default {
       if (await this.preview.file !== null) {
         this.newMember.uri = await this.getBase64(this.preview.file)
       }
+      this.newMember.teaching_lessons = await this.editorElement.getData()
       await this.$api.member.create(this.newMember)
       this.upload = await 'successed'
       await this.update(this.$api.member)
@@ -90,6 +92,15 @@ export default {
       }
       await reader.readAsDataURL(file)
     }
+  },
+  mounted() {
+    this.$nextTick(async () => {
+      const editor = await document.getElementById('createMemberTeachingLessons')
+      this.editorElement = await CKEDITOR.replace(editor, {
+        filebrowserUploadUrl: await this.$api.singleFileUpload.fullLink,
+        height: await 50
+      })
+    })
   }
 }
 </script>

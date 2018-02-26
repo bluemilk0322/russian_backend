@@ -21,14 +21,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      loginAction: 'loginAction'
-    }),
-    login () {
-      this.loginAction({
-        password: this.password,
-        account: this.account
-      })
+    ...mapActions('login', ['loginAction', 'saveStatus']),
+    async login () {
+      const account = await this.account
+      const password = await this.password
+      await this.loginAction({ account, password })
     }
   }
 }
@@ -36,7 +33,7 @@ export default {
 
 <style lang="sass">
 #login
-  margin: auto
+  // margin: auto
   vertical-align: middle
   width: 300px
   background: rgba(100, 100, 100, 0.4)
