@@ -14,6 +14,7 @@
           option(value="speech") 活動演講
           option(value="recruitment") 企業徵才
           option(value="scholarship") 獎助學金
+          option(value="enrollment") 招生資訊
           option(value="others") 其他訊息
       .form-group
         label 內容
