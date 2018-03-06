@@ -22,33 +22,27 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('teachingExcellence', {
-      teaching_excellence_id: state => state.currentEdit.teaching_excellence_id,
-      title: state => state.currentEdit.title,
-      year: state => state.currentEdit.year,
-      content: state => state.currentEdit.content
-    })
+    ...mapState('teachingExcellence', ['currentEdit'])
   },
   data () {
     return {
       edit: {
-        teaching_excellence_id: this.teaching_excellence_id,
-        title: this.title,
-        year: this.year,
-        content: this.content
+        title: null,
+        teaching_excellence_id: null,
+        year: null,
+        content: null
       }
     }
   },
   watch: {
-    content (newContent, oldContent) {
-      if (this.editorElement) this.editorElement.setData(newContent)
+    currentEdit (newData, oldData) {
+      this.edit = newData
+      if (this.editorElement) this.editorElement.setData(newData.content)
     }
   },
   methods: {
     async save () {
-      const teaching_excellence_id = await this.edit.teaching_excellence_id
-      const title = await this.edit.title
-      const year = await this.title
+      const { teaching_excellence_id, title, year } = this.edit
       const content = await this.editorElement.getData()
       this.$api.teachingExcellence.edit(await { teaching_excellence_id, title, year, content })
     }

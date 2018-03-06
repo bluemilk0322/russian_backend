@@ -30,10 +30,7 @@ export default {
   methods: {
     ...mapActions('teachingExcellence', ['update', 'edit']),
     async editItem (item) {
-      const teaching_excellence_id = await item.teaching_excellence_id
-      const title = await item.title
-      const year = await item.year
-      const content = await item.content
+      const { teaching_excellence_id, title, year, content } = await item
       await this.edit({ teaching_excellence_id, title, year, content })
     },
     async deleteItem (item) {
