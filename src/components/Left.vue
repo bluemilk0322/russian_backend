@@ -59,7 +59,7 @@ export default {
       margin: 0 auto
       height: 100px
       width: 100px
-      background: url(https://scontent-tpe1-1.xx.fbcdn.net/v/t31.0-8/12465819_1040206906001496_8984799855126950684_o.jpg?oh=a9beae18cc84e37d06b831cbdd58e512&oe=5AB34E0B) 0px -350px
+      background: url(https://scontent.ftpe8-2.fna.fbcdn.net/v/t31.0-8/620859_472817766072582_22556290_o.jpg?_nc_cat=0&_nc_eui2=AeEr0YHSxmeLSQ5Y23Fod4QajVAwjlvjUYrOVg1vh0fQCsG9Q2N0qAUg9k8O0WRr3vOmGGrnCJIwx8sbjBk2HIOS1hc6reXTgjQCZlj97IGzSg&oh=6901da3522820261a2c51a5cbaa0dcde&oe=5BAD1549) -15px 0px
       background-size: cover
     .name
       text-align: center
