@@ -5,16 +5,19 @@
   .card-body
     UserCreate
     UserList
+    UserEdit
 </template>
 <script>
 import UserCreate from './UserCreate'
 import UserList from './UserList'
+import UserEdit from './UserEdit'
 
 export default {
   name: 'User',
   components: {
     UserCreate,
-    UserList
+    UserList,
+    UserEdit
   }
 }
 </script>

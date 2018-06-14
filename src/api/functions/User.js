@@ -8,13 +8,13 @@ export default class {
     return await this.instance.get(this.link)
   }
 
-  async create ({ email, password, uri }) {
-    return await this.instance.post(this.link, { email, password, uri })
+  async create ({ email, password }) {
+    return await this.instance.post(this.link, { email, password })
   }
 
-  async edit ({ user_id, email, password, uri }) {
+  async edit ({ user_id, email, password }) {
     const requestLink = this.link + user_id
-    return await this.instance.patch(requestLink, { email, password, uri })
+    return await this.instance.patch(requestLink, { email, password })
   }
 
   async delete ({ user_id }) {

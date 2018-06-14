@@ -1,30 +1,47 @@
 <template lang="pug">
 #user-create.card
   .card-header
-    h1 Create
+    h1 新增
   .card-body
     form
       .form-group
-        label Username
-        input.form-control(v-model="username", type='text', placeholder="username", aria-label="username")
+        label Email
+        input.form-control(
+          v-model="email",
+          type='text',
+          placeholder="email"
+        )
       .form-group
         label Password
-        input.form-control(v-model="password", type='password', placeholder="password", aria-label="order")
+        input.form-control(
+          v-model="password",
+          type='password',
+          placeholder="password"
+        )
       .form-group
-        button.btn.btn-outline-success(type='button', @click.prevent="add") 新增
+        button.btn.btn-outline-success(
+          type='button',
+          @click.prevent="add"
+        ) 新增
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'UserCreate',
   data () {
     return {
-      username: null,
+      email: null,
       password: null
     }
   },
   methods: {
-    add () {
-      console.log(this.username, this.password)
+    ...mapActions('user', ['update']),
+    async add () {
+      const email = this.email
+      const password = this.password
+      await this.$api.user.create({ email, password })
+      await this.update(this.$api.user)
     }
   }
 }
