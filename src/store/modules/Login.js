@@ -17,51 +17,38 @@ export default {
     }
   },
   actions: {
-    async loginAction ({ commit, dispatch, state }, { account, password }) {
-      const testAccount = await account === 'admin'
-      const testPassword = await password === 'admin1234'
-      const loginStatus = await true
-      console.log(testAccount && testPassword, account, password)
-      if (testAccount && testPassword) {
-        const session = await 'session'
-        const user = await account
-        commit('updateSession', await { session })
-        commit('updateUser', await { user })
-        commit('updateLoginStatus', await { loginStatus })
-        dispatch('saveStatus')
-
-        setTimeout(async () => {
-          // commit('updateLoginStatus', await { loginStatus })
-          return await true
-        }, 1000)
-
-      }
-      return await false
+    async loginAction ({ commit, dispatch }, { email, accessToken }) {
+      const loginStatus = true
+      const session = accessToken
+      const user = email
+      commit('updateSession', { session })
+      commit('updateUser', { user })
+      commit('updateLoginStatus', { loginStatus })
+      dispatch('saveStatus')
     },
-    async logoutAction ({ commit, dispatch, state }) {
-      const loginStatus = await false
+    async logoutAction ({ commit }) {
+      const loginStatus = false
       localStorage.removeItem('session')
       localStorage.removeItem('user')
-      commit('updateLoginStatus', await { loginStatus })
+      commit('updateLoginStatus', { loginStatus })
     },
-    async saveStatus ({ commit, dispatch, state }) {
-      const session = await state.session
-      const user = await state.user
-      localStorage.setItem('session', await session)
-      localStorage.setItem('user', await user)
+    async saveStatus ({ state }) {
+      const session = state.session
+      const user = state.user
+      localStorage.setItem('session', session)
+      localStorage.setItem('user', user)
     },
-    async getStatus ({ commit, dispatch, state }) {
-      const session = await localStorage.getItem('session')
-      const user = await localStorage.getItem('user')
-      const loginStatus = await true
-      console.log('getStatus', session, user, session && user)
+    async getStatus ({ commit }) {
+      const session = localStorage.getItem('session')
+      const user = localStorage.getItem('user')
+      const loginStatus = true
       if (session && user) {
-        commit('updateSession', await { session })
-        commit('updateUser', await { user })
-        commit('updateLoginStatus', await { loginStatus })
-        return await true
+        commit('updateSession', { session })
+        commit('updateUser', { user })
+        commit('updateLoginStatus', { loginStatus })
+        return true
       }
-      return await false
+      return false
     }
   }
 }

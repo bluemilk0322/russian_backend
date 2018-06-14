@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import Admission from './functions/Admission'
 import Album from './functions/Album'
+import Authentication from './functions/Authentication'
 import Banner from './functions/Banner'
 import Content from './functions/Content'
 import EventHighlight from './functions/EventHighlight'
@@ -28,9 +29,15 @@ class Api {
     return this.rootLink + 'api/'
   }
 
+  get authorization () {
+    return localStorage.getItem('session')
+  }
+
   get options () {
+    const Authorization = this.authorization
     return {
-      baseURL: this.apiLink
+      baseURL: this.apiLink,
+      headers: { Authorization }
     }
   }
 
@@ -68,6 +75,10 @@ class Api {
 
   get album () {
     return new Album(this.instance)
+  }
+
+  get authentication () {
+    return new Authentication(this.instance)
   }
 
   get banner () {
