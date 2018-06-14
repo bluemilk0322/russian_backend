@@ -2,12 +2,16 @@ export default {
   namespaced: true,
   state () {
     return {
-      data: []
+      data: [],
+      currentEdit: {}
     }
   },
   mutations: {
     update (state, data) {
       state.data = data
+    },
+    edit (state, data) {
+      state.currentEdit = data
     }
   },
   actions: {
@@ -23,6 +27,9 @@ export default {
           commit('update', await data)
         }
       })
+    },
+    async edit ({ commit }, data) {
+      commit('edit', await data)
     }
   }
 }

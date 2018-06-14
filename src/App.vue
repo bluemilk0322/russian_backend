@@ -22,9 +22,7 @@ export default {
     Login
   },
   computed: {
-    ...mapState('login', {
-      loginStatus: state => state.loginStatus
-    })
+    ...mapState('login', ['loginStatus'])
   },
   methods: {
     ...mapActions('login', ['getStatus'])
